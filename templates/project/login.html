@@ -1,0 +1,126 @@
+{% extends 'project/base.html' %}
+
+{% block title %}Login - UCLPredict{% endblock %}
+
+{% block extra_css %}
+<style>
+    .login-card {
+        background: var(--uefa-gradient-hero);
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 8px 32px rgba(0, 26, 51, 0.3);
+    }
+    
+    .login-card input[type="text"],
+    .login-card input[type="password"] {
+        background-color: rgba(255, 255, 255, 0.12) !important;
+        border: 2px solid rgba(255, 255, 255, 0.3) !important;
+        color: white !important;
+        border-radius: 10px;
+        padding: 0.875rem 1.25rem;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        font-weight: 500;
+        width: 100%;
+    }
+    
+    .login-card input[type="text"]:focus,
+    .login-card input[type="password"]:focus {
+        background-color: rgba(255, 255, 255, 0.18) !important;
+        border-color: var(--uefa-gold) !important;
+        color: white !important;
+        box-shadow: 0 0 0 0.2rem rgba(255, 215, 0, 0.3) !important;
+        outline: none;
+    }
+    
+    .login-card input[type="text"]::placeholder,
+    .login-card input[type="password"]::placeholder {
+        color: rgba(255, 255, 255, 0.6) !important;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-7 col-md-9">
+        <!-- Champions League Themed Card -->
+        <div class="uefa-card login-card">
+            <div class="uefa-card-body p-5 text-white">
+                <!-- Header with Trophy Icon -->
+                <div class="text-center mb-5">
+                    <div style="font-size: 5rem; margin-bottom: 1.5rem; filter: drop-shadow(0 4px 12px rgba(255, 215, 0, 0.5));">
+                        <i class="fas fa-trophy" style="color: var(--uefa-gold);"></i>
+                    </div>
+                    <h2 class="mb-3" style="color: var(--uefa-gold); font-weight: 900; font-size: 2.5rem; text-shadow: 0 4px 12px rgba(0,0,0,0.3);">Login to UCLPredict</h2>
+                    <p class="text-light" style="font-size: 1.1rem; opacity: 0.95;">Sign in to access your predictions and saved data</p>
+                </div>
+                
+                <hr style="border-color: rgba(255,255,255,0.3); margin: 2rem 0;">
+                
+                <!-- Login Form -->
+                <form method="post" class="mt-4">
+                    {% csrf_token %}
+                    
+                    <!-- Hidden field for redirect after login -->
+                    {% if request.GET.next %}
+                    <input type="hidden" name="next" value="{{ request.GET.next }}">
+                    {% else %}
+                    <input type="hidden" name="next" value="{% url 'project:home' %}">
+                    {% endif %}
+                    
+                    <!-- Form Errors -->
+                    {% if form.non_field_errors %}
+                        <div class="alert alert-danger">
+                            {{ form.non_field_errors }}
+                        </div>
+                    {% endif %}
+                    
+                    <!-- Username Field -->
+                    <div class="mb-4">
+                        <label for="{{ form.username.id_for_label }}" class="form-label text-white mb-2" style="font-weight: 700; font-size: 1.05rem;">
+                            <i class="fas fa-user" style="color: var(--uefa-gold);"></i> Username
+                        </label>
+                        {{ form.username }}
+                        {% if form.username.errors %}
+                            <div class="text-warning mt-2" style="font-weight: 600;">
+                                <i class="fas fa-exclamation-triangle"></i> {{ form.username.errors.0 }}
+                            </div>
+                        {% endif %}
+                    </div>
+                    
+                    <!-- Password Field -->
+                    <div class="mb-5">
+                        <label for="{{ form.password.id_for_label }}" class="form-label text-white mb-2" style="font-weight: 700; font-size: 1.05rem;">
+                            <i class="fas fa-lock" style="color: var(--uefa-gold);"></i> Password
+                        </label>
+                        {{ form.password }}
+                        {% if form.password.errors %}
+                            <div class="text-warning mt-2" style="font-weight: 600;">
+                                <i class="fas fa-exclamation-triangle"></i> {{ form.password.errors.0 }}
+                            </div>
+                        {% endif %}
+                    </div>
+                    
+                    <!-- Submit Button -->
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-uefa btn-lg" style="background: linear-gradient(135deg, var(--uefa-gold), #FFA500); border: none; padding: 1rem;">
+                            <i class="fas fa-sign-in-alt"></i> Login
+                        </button>
+                    </div>
+                </form>
+                
+                <hr style="border-color: rgba(255,255,255,0.3); margin: 2.5rem 0 1.5rem 0;">
+                
+                <!-- Sign Up Link -->
+                <div class="text-center">
+                    <p class="text-light mb-0" style="font-size: 1.05rem;">
+                        Don't have an account? 
+                        <a href="{% url 'project:signup' %}" class="text-uefa-gold text-decoration-none fw-bold" style="text-shadow: 0 2px 4px rgba(0,0,0,0.3);">Sign up here</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

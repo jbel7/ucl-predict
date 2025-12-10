@@ -1,0 +1,207 @@
+{% extends 'project/base.html' %}
+
+{% block title %}Match Predictor - UCLPredict{% endblock %}
+
+{% block extra_css %}
+<style>
+    .prediction-card {
+        border-top: 5px solid #28a745;
+    }
+    
+    .prediction-result-header {
+        background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+    }
+    
+    .team-strength-card {
+        background: linear-gradient(135deg, #1a1f2e 0%, #1f2535 100%);
+        border: 2px solid rgba(0, 102, 204, 0.3);
+        border-radius: 12px;
+        padding: 1.5rem;
+        transition: all 0.3s ease;
+    }
+    
+    .team-strength-card:hover {
+        background: linear-gradient(135deg, #1f2535 0%, #252b3d 100%);
+        transform: translateY(-3px);
+        box-shadow: 0 4px 12px rgba(0, 102, 204, 0.25);
+        border-color: rgba(0, 102, 204, 0.5);
+    }
+    
+    .vs-badge {
+        font-size: 1.2rem;
+        padding: 0.8rem 1.5rem;
+    }
+    
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="mb-5">
+    <h1 class="page-title"><i class="fas fa-robot"></i> AI-Powered Match Predictor</h1>
+    <p class="page-subtitle">Predict Champions League match outcomes using advanced machine learning algorithms trained on real tournament data</p>
+</div>
+    
+<div class="row g-4">
+    <!-- Prediction Form -->
+    <div class="col-lg-6">
+        <div class="uefa-card">
+            <div class="uefa-card-header">
+                <i class="fas fa-futbol"></i> Select Teams
+            </div>
+            <div class="uefa-card-body">
+                {% if not user.is_authenticated %}
+                <div class="alert alert-info-uefa mb-4">
+                    <strong><i class="fas fa-lightbulb"></i> Tip:</strong> <a href="{% url 'login' %}?next={% url 'project:predictor' %}" class="text-uefa-blue fw-bold">Log in</a> or <a href="{% url 'project:signup' %}" class="text-uefa-blue fw-bold">sign up</a> to save your predictions for future reference.
+                </div>
+                {% endif %}
+                
+                <form method="post">
+                    {% csrf_token %}
+                    
+                    <div class="mb-4">
+                        <label for="{{ form.team_a.id_for_label }}" class="form-label fw-bold mb-2" style="color: var(--uefa-navy); font-size: 1.05rem;">
+                            <i class="fas fa-shield-alt text-uefa-blue"></i> {{ form.team_a.label }}
+                        </label>
+                        {{ form.team_a }}
+                        {% if form.team_a.errors %}
+                        <div class="text-danger mt-2">{{ form.team_a.errors }}</div>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="text-center my-4">
+                        <span class="badge badge-uefa badge-warning-uefa vs-badge">VS</span>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label for="{{ form.team_b.id_for_label }}" class="form-label fw-bold mb-2" style="color: var(--uefa-navy); font-size: 1.05rem;">
+                            <i class="fas fa-shield-alt text-uefa-blue"></i> {{ form.team_b.label }}
+                        </label>
+                        {{ form.team_b }}
+                        {% if form.team_b.errors %}
+                        <div class="text-danger mt-2">{{ form.team_b.errors }}</div>
+                        {% endif %}
+                    </div>
+                    
+                    {% if form.non_field_errors %}
+                    <div class="alert alert-danger">
+                        {{ form.non_field_errors }}
+                    </div>
+                    {% endif %}
+                    
+                    <div class="d-grid mt-4">
+                        <button type="submit" class="btn btn-uefa btn-lg">
+                            <i class="fas fa-magic"></i> Predict Match Outcome
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+        
+    <!-- Prediction Results -->
+    <div class="col-lg-6">
+        {% if prediction_result %}
+        <div class="uefa-card prediction-card">
+            <div class="uefa-card-header prediction-result-header">
+                <i class="fas fa-trophy"></i> Prediction Results
+            </div>
+            <div class="uefa-card-body">
+                <h4 class="text-center mb-4" style="font-weight: 800; font-size: 1.5rem; color: var(--uefa-white);">
+                    {{ prediction_result.team_a.name }} 
+                    <span class="text-muted" style="font-weight: 400; color: rgba(232, 234, 237, 0.6);">vs</span> 
+                    {{ prediction_result.team_b.name }}
+                </h4>
+                
+                <div class="alert alert-success-uefa text-center mb-4" style="border-left: 5px solid #28a745;">
+                    <div style="font-size: 4rem; margin-bottom: 0.75rem;">🏆</div>
+                    <h3 class="mb-2" style="color: #155724; font-weight: 800; font-size: 1.75rem;">{{ prediction_result.predicted_result_display }}</h3>
+                    <p class="mb-0" style="color: #155724; font-size: 1.1rem; font-weight: 600;">
+                        <i class="fas fa-chart-line"></i> Confidence: <span style="font-size: 1.3rem;">{{ prediction_result.confidence }}%</span>
+                    </p>
+                </div>
+                
+                <h6 class="mt-4 mb-3" style="color: var(--uefa-white); font-weight: 800; font-size: 1.1rem;">
+                    <i class="fas fa-chart-pie text-uefa-blue"></i> Probability Breakdown
+                </h6>
+                {% for outcome, prob in prediction_result.probabilities.items %}
+                <div class="mb-4">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <span style="font-weight: 600; color: var(--uefa-white);">{{ outcome }}</span>
+                        <strong style="font-size: 1.1rem; color: var(--uefa-blue);">{{ prob }}%</strong>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar {% if outcome == prediction_result.predicted_result_display %}bg-success{% else %}bg-secondary{% endif %}" 
+                            role="progressbar" 
+                            style="--progress-width: {{ prob }}%; width: var(--progress-width);" 
+                            aria-valuenow="{{ prob }}" 
+                            aria-valuemin="0" 
+                            aria-valuemax="100">
+                            {{ prob }}%
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                
+                <hr class="my-4" style="border-top: 2px solid var(--uefa-border);">
+                
+                <h6 class="mb-3" style="color: var(--uefa-white); font-weight: 800; font-size: 1.1rem;">
+                    <i class="fas fa-bolt text-uefa-blue"></i> Team Strength Indicators
+                </h6>
+                <div class="row g-3 text-center">
+                    <div class="col-6">
+                        <div class="team-strength-card">
+                            <h3 class="text-uefa-blue mb-2" style="font-weight: 900; font-size: 2rem;">{{ prediction_result.team_a_strength }}</h3>
+                            <small class="text-muted" style="font-weight: 600;">{{ prediction_result.team_a.name }}</small>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="team-strength-card">
+                            <h3 class="text-uefa-blue mb-2" style="font-weight: 900; font-size: 2rem;">{{ prediction_result.team_b_strength }}</h3>
+                            <small class="text-muted" style="font-weight: 600;">{{ prediction_result.team_b.name }}</small>
+                        </div>
+                    </div>
+                </div>
+                
+                {% if prediction_result.note %}
+                <div class="alert alert-warning mt-4 mb-0" style="border-left: 5px solid #ffc107;">
+                    <small><i class="fas fa-info-circle"></i> {{ prediction_result.note }}</small>
+                </div>
+                {% endif %}
+                
+                {% if user.is_authenticated and prediction_result.saved %}
+                <div class="alert alert-success-uefa mt-4 mb-0">
+                    <i class="fas fa-check-circle"></i> <strong>Prediction Saved!</strong> This prediction has been saved to your profile. <a href="{% url 'project:saved_predictions' %}" class="text-uefa-blue fw-bold">View all saved predictions</a>
+                </div>
+                {% elif not user.is_authenticated %}
+                <div class="alert alert-info-uefa mt-4 mb-0">
+                    <i class="fas fa-info-circle"></i> <a href="{% url 'login' %}?next={% url 'project:predictor' %}" class="text-uefa-blue fw-bold">Log in</a> or <a href="{% url 'project:signup' %}" class="text-uefa-blue fw-bold">sign up</a> to save this prediction to your profile.
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        {% else %}
+        <div class="uefa-card">
+            <div class="uefa-card-body text-center py-5">
+                <div class="d-flex justify-content-center mb-4">
+                    <div style="width: 250px; height: 250px; background-image: url('https://www.uefa.com/imgstatic/uefacom/uefacom/static/uefa/img/trophy/champions-league-trophy.png'); background-size: contain; background-repeat: no-repeat; background-position: center; opacity: 0.3; filter: blur(0.5px) brightness(0.9);"></div>
+                </div>
+                <h5 class="mb-3" style="font-weight: 800; font-size: 1.5rem; color: var(--uefa-white);">Select Two Teams Above</h5>
+                <p class="text-muted mb-4" style="font-size: 1.05rem; line-height: 1.8; color: rgba(232, 234, 237, 0.7);">Our AI model will analyze historical data, team strength, and performance metrics to predict the match outcome with high confidence.</p>
+                <div class="mt-4 d-flex align-items-center justify-content-center">
+                    <span class="text-muted" style="font-weight: 600; font-size: 1.1rem; color: rgba(232, 234, 237, 0.7);">Powered by Machine Learning</span>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+    
+<div class="mt-5 d-flex gap-3 justify-content-center">
+    <a href="{% url 'project:match_list' %}" class="btn btn-uefa-outline btn-lg">
+        <i class="fas fa-futbol"></i> View Featured Matches
+    </a>
+    <a href="{% url 'project:home' %}" class="btn btn-uefa-outline btn-lg">
+        <i class="fas fa-home"></i> Back to Home
+    </a>
+</div>
+{% endblock %}

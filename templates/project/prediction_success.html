@@ -1,0 +1,31 @@
+{% extends 'project/base.html' %}
+
+{% block title %}Prediction Saved - UCLPredict{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 text-center">
+            <div class="card shadow-lg">
+                <div class="card-body p-5">
+                    <div class="mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" fill="currentColor" class="bi bi-check-circle-fill text-success" viewBox="0 0 16 16">
+                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+                        </svg>
+                    </div>
+                    <h1 class="text-success mb-3">Prediction Saved!</h1>
+                    <p class="lead">Your match prediction has been saved successfully.</p>
+                    <hr class="my-4">
+                    <div class="d-grid gap-2">
+                        {% if user.is_authenticated %}
+                        <a href="{% url 'project:saved_predictions' %}" class="btn btn-primary btn-lg">View My Predictions</a>
+                        {% endif %}
+                        <a href="{% url 'project:predictor' %}" class="btn btn-outline-secondary">Make Another Prediction</a>
+                        <a href="{% url 'project:home' %}" class="btn btn-outline-secondary">Back to Home</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
