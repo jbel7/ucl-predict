@@ -5,8 +5,8 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 from django.db.models import Q
-from .models import Team, PlayerRanking, MatchPredictionTemplate, FavoriteTeam, SavedPrediction, TeamStatistic, ChampionsLeagueMatch, CLRecord
-from .forms import PredictorForm, FavoriteTeamForm
+from .models import Team, PlayerRanking, MatchPredictionTemplate, SavedPrediction, TeamStatistic, ChampionsLeagueMatch, CLRecord
+from .forms import PredictorForm
 from .api_service import get_team_matches_from_api, get_team_cl_record_from_api, get_all_recent_matches_from_api
 from ml_predictor import get_predictor
 
@@ -226,29 +226,6 @@ def delete_prediction(request, pk):
         messages.error(request, 'Prediction not found or you do not have permission to delete it.')
     
     return redirect('project:saved_predictions')
-
-
-# Favorite Teams (Login Required)
-class FavoriteTeamListView(LoginRequiredMixin, ListView):
-    """List user's favorite teams"""
-    model = FavoriteTeam
-    template_name = 'project/favorite_teams.html'
-    context_object_name = 'favorites'
-    
-    def get_queryset(self):
-        return FavoriteTeam.objects.filter(user=self.request.user).order_by('-created_at')
-
-
-class AddFavoriteTeamView(LoginRequiredMixin, CreateView):
-    """Add a team to favorites"""
-    model = FavoriteTeam
-    form_class = FavoriteTeamForm
-    template_name = 'project/add_favorite.html'
-    success_url = reverse_lazy('project:favorite_teams')
-    
-    def form_valid(self, form):
-        form.instance.user = self.request.user
-        return super().form_valid(form)
 
 
 # Sign-up View

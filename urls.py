@@ -28,6 +28,4 @@ urlpatterns = [
     # User Features (Login Required)
     path('my-predictions/', views.SavedPredictionListView.as_view(), name='saved_predictions'),
     path('my-predictions/<int:pk>/delete/', views.delete_prediction, name='delete_prediction'),
-    path('my-favorites/', views.FavoriteTeamListView.as_view(), name='favorite_teams'),
-    path('add-favorite/', views.AddFavoriteTeamView.as_view(), name='add_favorite'),
 ]
