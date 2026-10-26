@@ -1,346 +1,137 @@
 {% extends 'project/base.html' %}
 
-{% block title %}{{ team.name }} - UCLPredict{% endblock %}
-
-{% block extra_css %}
-<style>
-    .team-header-card {
-        background: var(--uefa-gradient-hero);
-        border-radius: 20px;
-        overflow: hidden;
-        box-shadow: 0 8px 32px rgba(0, 26, 51, 0.3);
-        position: relative;
-    }
-    
-    .team-header-card::before {
-        content: '';
-        position: absolute;
-        top: 20px;
-        right: 20px;
-        width: 200px;
-        height: 200px;
-        background-image: url('https://upload.wikimedia.org/wikipedia/en/thumb/b/bf/UEFA_Champions_League_logo.svg/1200px-UEFA_Champions_League_logo.svg.png');
-        background-size: contain;
-        background-repeat: no-repeat;
-        background-position: center;
-        opacity: 0.1;
-        pointer-events: none;
-    }
-    
-    .team-header-content {
-        padding: 3rem 2rem;
-        color: white;
-        position: relative;
-        z-index: 1;
-    }
-    
-    .team-logo-large {
-        max-height: 180px;
-        max-width: 180px;
-        filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.4));
-        transition: all 0.4s ease;
-    }
-    
-    .team-logo-large:hover {
-        transform: scale(1.1) rotate(5deg);
-    }
-    
-    .info-badge {
-        display: inline-block;
-        background: rgba(255, 255, 255, 0.15);
-        padding: 0.5rem 1rem;
-        border-radius: 8px;
-        margin: 0.25rem;
-        backdrop-filter: blur(10px);
-    }
-</style>
-{% endblock %}
+{% block title %}{{ team.name }} · UCLPredict{% endblock %}
 
 {% block content %}
-<!-- Team Header -->
-<div class="mb-5">
-    <div class="uefa-card team-header-card">
-        <div class="team-header-content">
-            <div class="row align-items-center">
-                <div class="col-md-3 text-center">
-                    {% if team.logo_url %}
-                    <img src="{{ team.logo_url }}" alt="{{ team.name }} logo" class="team-logo-large">
-                    {% else %}
-                    <div style="font-size: 8rem; opacity: 0.3;">
-                        <i class="fas fa-shield-alt"></i>
-                    </div>
-                    {% endif %}
-                </div>
-                <div class="col-md-9">
-                    <h1 class="mb-3" style="color: var(--uefa-gold); font-weight: 900; font-size: 3rem; text-shadow: 0 4px 12px rgba(0,0,0,0.3);">
-                        {{ team.name }}
-                    </h1>
-                    <div class="mb-3">
-                        <span class="info-badge">
-                            <i class="fas fa-flag"></i> <strong>{{ team.country }}</strong>
-                        </span>
-                        <span class="info-badge">
-                            <i class="fas fa-trophy"></i> <strong>{{ team.league }}</strong>
-                        </span>
-                        {% if statistics and statistics.coach %}
-                        <span class="info-badge">
-                            <i class="fas fa-user-tie"></i> <strong>Coach: {{ statistics.coach }}</strong>
-                        </span>
-                        {% endif %}
-                    </div>
+<section class="dark page-head">
+    <div class="wrap">
+        <a class="eyebrow back-link" href="{% url 'project:team_list' %}">← All teams</a>
+        <div class="team-hero">
+            {% include 'project/_crest.html' with team=team size='crest-xl' %}
+            <div>
+                <p class="eyebrow">{{ team.league }} · {{ team.country }}</p>
+                <h1 class="display">{{ team.name }}</h1>
+                <div class="chips">
+                    {% if statistics.coach %}<span class="chip">Coach <b>{{ statistics.coach }}</b></span>{% endif %}
+                    {% if statistics.founded_year %}<span class="chip">Founded <b>{{ statistics.founded_year }}</b></span>{% endif %}
                 </div>
             </div>
         </div>
-    </div>
-</div>
-
-<div class="row g-4">
-    <!-- Left Column: Players -->
-    <div class="col-lg-6">
-        <div class="uefa-card">
-            <div class="uefa-card-header">
-                <i class="fas fa-users"></i> Current Players (Up to 15)
-            </div>
-            <div class="uefa-card-body">
-                {% if players %}
-                <div class="table-responsive">
-                    <table class="table uefa-table mb-0">
-                        <thead>
-                            <tr>
-                                <th>Rank</th>
-                                <th>Player</th>
-                                <th>Position</th>
-                                <th class="text-center">G+A per 90</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for player in players %}
-                            <tr>
-                                <td>
-                                    {% if player.rank_int <= 3 %}
-                                    <span class="rank-badge top-3">{{ player.rank_int }}</span>
-                                    {% else %}
-                                    <span class="rank-badge" style="width: 40px; height: 40px; font-size: 1rem;">{{ player.rank_int }}</span>
-                                    {% endif %}
-                                </td>
-                                <td>
-                                    <strong style="color: var(--uefa-white); font-weight: 700;">{{ player.player_name }}</strong>
-                                </td>
-                                <td>
-                                    <span class="badge badge-uefa 
-                                        {% if player.position == 'FWD' %}badge-primary-uefa
-                                        {% elif player.position == 'MID' %}badge-success-uefa
-                                        {% elif player.position == 'DEF' %}badge-warning-uefa
-                                        {% else %}badge-uefa{% endif %}">
-                                        {{ player.get_position_display }}
-                                    </span>
-                                </td>
-                                <td class="text-center">
-                                    <span class="badge badge-uefa badge-success-uefa">{{ player.ga_per_90 }}</span>
-                                </td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-                {% else %}
-                <p class="text-muted text-center py-4">No players available for this team.</p>
-                {% endif %}
-            </div>
+        <div class="btn-row" style="margin-top: 32px;">
+            <a href="{% url 'project:predictor' %}" class="btn btn-primary">Predict a {{ team.name }} match <span class="arrow">→</span></a>
         </div>
     </div>
+</section>
 
-    <!-- Right Column: Statistics -->
-    <div class="col-lg-6">
-        {% if statistics %}
-        <div class="uefa-card mb-4">
-            <div class="uefa-card-header">
-                <i class="fas fa-chart-bar"></i> Team Statistics
-            </div>
-            <div class="uefa-card-body">
-                <div class="row g-3">
-                    <div class="col-6">
-                        <div class="text-center p-3" style="background: linear-gradient(135deg, #1a1f2e, #1f2535); border: 2px solid rgba(255, 215, 0, 0.2); border-radius: 12px;">
-                            <div style="font-size: 2.5rem; color: var(--uefa-gold); margin-bottom: 0.5rem;">
-                                <i class="fas fa-trophy"></i>
-                            </div>
-                            <h3 class="mb-0" style="font-weight: 900; color: var(--uefa-white);">{{ statistics.ucl_titles }}</h3>
-                            <small class="text-muted" style="font-weight: 600; color: rgba(232, 234, 237, 0.7);">UCL Titles</small>
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="text-center p-3" style="background: linear-gradient(135deg, #1a1f2e, #1f2535); border: 2px solid rgba(192, 192, 192, 0.2); border-radius: 12px;">
-                            <div style="font-size: 2.5rem; color: var(--uefa-silver); margin-bottom: 0.5rem;">
-                                <i class="fas fa-medal"></i>
-                            </div>
-                            <h3 class="mb-0" style="font-weight: 900; color: var(--uefa-white);">{{ statistics.ucl_finals }}</h3>
-                            <small class="text-muted" style="font-weight: 600; color: rgba(232, 234, 237, 0.7);">Finals Reached</small>
-                        </div>
-                    </div>
-                    <div class="col-12">
-                        <div class="p-3" style="background: linear-gradient(135deg, #1a1f2e, #1f2535); border: 2px solid rgba(0, 102, 204, 0.2); border-radius: 12px;">
-                            <p class="mb-2" style="color: var(--uefa-white);"><strong><i class="fas fa-building text-uefa-blue"></i> Stadium:</strong> {{ statistics.stadium_name }}</p>
-                            <p class="mb-0" style="color: var(--uefa-white);"><strong><i class="fas fa-users text-uefa-blue"></i> Capacity:</strong> {{ statistics.stadium_capacity|floatformat:0 }} seats</p>
-                        </div>
-                    </div>
+<section class="section">
+    <div class="wrap grid grid-2" style="align-items: start;">
+        <div class="panel">
+            <div class="panel-head">
+                <div>
+                    <p class="eyebrow">Club</p>
+                    <h2>Honours &amp; ground</h2>
                 </div>
             </div>
-        </div>
-        {% endif %}
-    </div>
-</div>
-
-<!-- Champions League Records -->
-{% if cl_records %}
-<div class="mt-4">
-    <div class="uefa-card">
-        <div class="uefa-card-header">
-            <i class="fas fa-trophy"></i> Champions League Records (Last 5 Years)
-        </div>
-        <div class="uefa-card-body p-0">
-            <div class="table-responsive">
-                <table class="table uefa-table mb-0">
-                    <thead>
-                        <tr>
-                            <th>Season</th>
-                            <th class="text-center">Wins</th>
-                            <th class="text-center">Draws</th>
-                            <th class="text-center">Losses</th>
-                            <th class="text-center">Goals For</th>
-                            <th class="text-center">Goals Against</th>
-                            <th>Stage Reached</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for record in cl_records %}
-                        <tr>
-                            <td><strong>{{ record.season }}</strong></td>
-                            <td class="text-center">
-                                <span class="badge badge-uefa badge-success-uefa">{{ record.wins }}</span>
-                            </td>
-                            <td class="text-center">
-                                <span class="badge badge-uefa badge-warning-uefa">{{ record.draws }}</span>
-                            </td>
-                            <td class="text-center">
-                                <span class="badge badge-uefa" style="background: #dc3545; color: white;">{{ record.losses }}</span>
-                            </td>
-                            <td class="text-center"><strong>{{ record.goals_for }}</strong></td>
-                            <td class="text-center"><strong>{{ record.goals_against }}</strong></td>
-                            <td>
-                                <span class="badge badge-uefa badge-primary-uefa">
-                                    {% if record.stage_reached == 'Champions' %}
-                                        <i class="fas fa-trophy"></i> Champions
-                                    {% elif 'Final' in record.stage_reached %}
-                                        <i class="fas fa-medal"></i> {{ record.stage_reached }}
-                                    {% else %}
-                                        {{ record.stage_reached }}
-                                    {% endif %}
-                                </span>
-                            </td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
+            {% if statistics %}
+            <div class="big-stats">
+                <div class="big-stat"><span class="eyebrow">UCL titles</span><b>{{ statistics.ucl_titles }}</b></div>
+                <div class="big-stat"><span class="eyebrow">Finals reached</span><b>{{ statistics.ucl_finals }}</b></div>
+                <div class="big-stat wide"><span class="eyebrow">Stadium</span><b>{{ statistics.stadium_name }}</b></div>
+                <div class="big-stat wide"><span class="eyebrow">Capacity</span><b>{{ statistics.stadium_capacity|floatformat:"0g" }} seats</b></div>
             </div>
-        </div>
-    </div>
-</div>
-{% endif %}
-
-<!-- Recent Matches -->
-{% if recent_matches %}
-<div class="mt-4">
-    <div class="uefa-card">
-        <div class="uefa-card-header">
-            <i class="fas fa-futbol"></i> Recent Champions League Matches
-            {% if using_api %}
-            <span class="badge badge-uefa badge-success-uefa ms-2" style="font-size: 0.75rem;">
-                <i class="fas fa-sync"></i> Live Data
-            </span>
+            {% else %}
+            <p class="muted">No club statistics available for {{ team.name }} yet.</p>
             {% endif %}
         </div>
-        <div class="uefa-card-body p-0">
-            <div class="table-responsive">
-                <table class="table uefa-table mb-0">
+
+        <div class="panel flush">
+            <div class="panel-head">
+                <div>
+                    <p class="eyebrow">Squad</p>
+                    <h2>Ranked players</h2>
+                </div>
+            </div>
+            {% if players %}
+            <div class="table-wrap" style="margin-top: 4px;">
+                <table class="data">
                     <thead>
-                        <tr>
-                            <th>Date</th>
-                            <th>Match</th>
-                            <th class="text-center">Score</th>
-                            <th>Stage</th>
-                            <th>Scorers</th>
-                        </tr>
+                        <tr><th>#</th><th>Player</th><th class="hide-sm">Position</th><th class="num">G+A / 90</th></tr>
                     </thead>
                     <tbody>
-                        {% for match in recent_matches %}
+                        {% for player in players %}
                         <tr>
-                            <td style="min-width: 150px;">
-                                <div style="font-weight: 600;">{{ match.date|date:"M d, Y" }}</div>
-                                <small class="text-muted">{{ match.date|date:"H:i" }}</small>
-                            </td>
-                            <td>
-                                <div class="d-flex align-items-center">
-                                    <strong class="me-2">{{ match.home_team }}</strong>
-                                    <span class="badge badge-uefa badge-warning-uefa mx-2">VS</span>
-                                    <strong>{{ match.away_team }}</strong>
-                                </div>
-                            </td>
-                            <td class="text-center">
-                                <span class="badge badge-uefa {% if match.home_score > match.away_score %}badge-success-uefa{% elif match.home_score < match.away_score %}badge-primary-uefa{% else %}badge-warning-uefa{% endif %}" style="font-size: 1.1rem; padding: 0.6rem 1.2rem; min-width: 90px;">
-                                    {{ match.home_score }} - {{ match.away_score }}
-                                </span>
-                            </td>
-                            <td>
-                                <span class="badge badge-uefa badge-primary-uefa">
-                                    {% if match.stage == 'GROUP' %}
-                                        <i class="fas fa-users"></i> Group Stage
-                                    {% elif match.stage == 'R16' %}
-                                        <i class="fas fa-trophy"></i> Round of 16
-                                    {% elif match.stage == 'QF' %}
-                                        <i class="fas fa-trophy"></i> Quarter Finals
-                                    {% elif match.stage == 'SF' %}
-                                        <i class="fas fa-trophy"></i> Semi Finals
-                                    {% elif match.stage == 'FINAL' %}
-                                        <i class="fas fa-trophy"></i> Final
-                                    {% else %}
-                                        {{ match.stage }}
-                                    {% endif %}
-                                </span>
-                            </td>
-                            <td style="min-width: 200px;">
-                                {% if match.scorers.home or match.scorers.away %}
-                                <div class="small">
-                                    {% if match.scorers.home %}
-                                    <div class="mb-1">
-                                        <strong>{{ match.home_team }}:</strong> {{ match.scorers.home }}
-                                    </div>
-                                    {% endif %}
-                                    {% if match.scorers.away %}
-                                    <div>
-                                        <strong>{{ match.away_team }}:</strong> {{ match.scorers.away }}
-                                    </div>
-                                    {% endif %}
-                                </div>
-                                {% else %}
-                                <span class="text-muted small">No scorer information</span>
-                                {% endif %}
-                            </td>
+                            <td><span class="rank{% if player.rank_int <= 3 %} top{% endif %}">{{ player.rank_int }}</span></td>
+                            <td class="strong">{{ player.player_name }}</td>
+                            <td class="hide-sm"><span class="tag tag-{{ player.position }}">{{ player.get_position_display }}</span></td>
+                            <td class="num">{{ player.ga_per_90 }}</td>
                         </tr>
                         {% endfor %}
                     </tbody>
                 </table>
             </div>
+            {% else %}
+            <p class="muted" style="padding: 0 20px 24px;">No ranked players for this team yet.</p>
+            {% endif %}
         </div>
     </div>
-</div>
+</section>
+
+{% if cl_records %}
+<section class="section">
+    <div class="wrap">
+        <div class="section-head">
+            <div>
+                <p class="eyebrow">Champions League form</p>
+                <h2 class="h2">Last five seasons</h2>
+            </div>
+        </div>
+        <div class="panel flush table-wrap">
+            <table class="data">
+                <thead>
+                    <tr>
+                        <th>Season</th>
+                        <th>W · D · L</th>
+                        <th class="num hide-sm">Goals for</th>
+                        <th class="num hide-sm">Goals against</th>
+                        <th>Stage reached</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for record in cl_records %}
+                    <tr>
+                        <td class="strong mono">{{ record.season }}</td>
+                        <td class="wdl"><span class="w">{{ record.wins }}</span> · <span class="d">{{ record.draws }}</span> · <span class="l">{{ record.losses }}</span></td>
+                        <td class="num hide-sm">{{ record.goals_for }}</td>
+                        <td class="num hide-sm">{{ record.goals_against }}</td>
+                        <td>
+                            {% if record.stage_reached == 'Champions' or record.stage_reached == 'Winner' %}
+                                <span class="tag tag-champ">★ {{ record.stage_reached }}</span>
+                            {% elif 'Final' in record.stage_reached %}
+                                <span class="tag tag-win">{{ record.stage_reached }}</span>
+                            {% else %}
+                                <span class="tag">{{ record.stage_reached }}</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
 {% endif %}
 
-<div class="mt-5 d-flex gap-3 justify-content-center">
-    <a href="{% url 'project:team_list' %}" class="btn btn-uefa-outline btn-lg">
-        <i class="fas fa-arrow-left"></i> Back to Teams
-    </a>
-    <a href="{% url 'project:home' %}" class="btn btn-uefa-outline btn-lg">
-        <i class="fas fa-home"></i> Home
-    </a>
-</div>
+{% if recent_matches %}
+<section class="section">
+    <div class="wrap">
+        <div class="section-head">
+            <div>
+                <p class="eyebrow">Results</p>
+                <h2 class="h2">Recent matches</h2>
+            </div>
+        </div>
+        {% include 'project/_match_table.html' with matches=recent_matches %}
+    </div>
+</section>
+{% endif %}
 {% endblock %}

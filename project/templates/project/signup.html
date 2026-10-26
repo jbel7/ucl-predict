@@ -1,173 +1,54 @@
 {% extends 'project/base.html' %}
 
-{% block title %}Sign Up - UCLPredict{% endblock %}
-
-{% block extra_css %}
-<style>
-    .signup-card {
-        background: var(--uefa-gradient-hero);
-        border-radius: 20px;
-        overflow: hidden;
-        box-shadow: 0 8px 32px rgba(0, 26, 51, 0.3);
-    }
-    
-    .signup-card .form-control,
-    .signup-card input[type="text"],
-    .signup-card input[type="password"] {
-        background-color: rgba(255, 255, 255, 0.12) !important;
-        border: 2px solid rgba(255, 255, 255, 0.3) !important;
-        color: white !important;
-        border-radius: 10px;
-        padding: 0.875rem 1.25rem;
-        font-size: 1rem;
-        transition: all 0.3s ease;
-        font-weight: 500;
-        width: 100%;
-    }
-    
-    .signup-card .form-control:focus,
-    .signup-card input[type="text"]:focus,
-    .signup-card input[type="password"]:focus {
-        background-color: rgba(255, 255, 255, 0.18) !important;
-        border-color: var(--uefa-gold) !important;
-        color: white !important;
-        box-shadow: 0 0 0 0.2rem rgba(255, 215, 0, 0.3) !important;
-        outline: none;
-    }
-    
-    .signup-card .form-control::placeholder,
-    .signup-card input[type="text"]::placeholder,
-    .signup-card input[type="password"]::placeholder {
-        color: rgba(255, 255, 255, 0.6) !important;
-    }
-    
-    .benefits-card {
-        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-    }
-</style>
-{% endblock %}
+{% block title %}Sign up · UCLPredict{% endblock %}
 
 {% block content %}
-<div class="row justify-content-center">
-    <div class="col-lg-7 col-md-9">
-        <!-- Champions League Themed Card -->
-        <div class="uefa-card signup-card">
-            <div class="uefa-card-body p-5 text-white">
-                <!-- Header with Trophy Icon -->
-                <div class="text-center mb-5">
-                    <div style="font-size: 5rem; margin-bottom: 1.5rem; filter: drop-shadow(0 4px 12px rgba(255, 215, 0, 0.5));">
-                        <i class="fas fa-trophy" style="color: var(--uefa-gold);"></i>
-                    </div>
-                    <h2 class="mb-3" style="color: var(--uefa-gold); font-weight: 900; font-size: 2.5rem; text-shadow: 0 4px 12px rgba(0,0,0,0.3);">Join UCLPredict</h2>
-                    <p class="text-light" style="font-size: 1.1rem; opacity: 0.95;">Create your account and start predicting Champions League matches</p>
+<section class="dark page-head">
+    <div class="wrap">
+        <p class="eyebrow">Account</p>
+        <h1 class="display">Join the <span class="accent">table.</span></h1>
+    </div>
+</section>
+
+<section class="section">
+    <div class="wrap auth">
+        <div class="panel">
+            <p class="eyebrow">Sign up</p>
+            <h1>Create your account</h1>
+            <p class="muted" style="margin-bottom: 22px;">Free, and only takes a username and password.</p>
+
+            <form method="post" class="form">
+                {% csrf_token %}
+                {% if user_form.non_field_errors %}<div class="form-error">{{ user_form.non_field_errors }}</div>{% endif %}
+                <div class="field">
+                    <label for="{{ user_form.username.id_for_label }}">Username</label>
+                    {{ user_form.username }}
+                    {{ user_form.username.errors }}
                 </div>
-                
-                <hr style="border-color: rgba(255,255,255,0.3); margin: 2rem 0;">
-                
-                <!-- Sign-up Form -->
-                <form method="post" class="mt-4">
-                    {% csrf_token %}
-                    
-                    <!-- Form Errors -->
-                    {% if user_form.non_field_errors %}
-                        <div class="alert alert-danger">
-                            {{ user_form.non_field_errors }}
-                        </div>
-                    {% endif %}
-                    
-                    <!-- Username Field -->
-                    <div class="mb-4">
-                        <label for="{{ user_form.username.id_for_label }}" class="form-label text-white mb-2" style="font-weight: 700; font-size: 1.05rem;">
-                            <i class="fas fa-user" style="color: var(--uefa-gold);"></i> Username
-                        </label>
-                        {{ user_form.username }}
-                        {% if user_form.username.errors %}
-                            <div class="text-warning mt-2" style="font-weight: 600;">
-                                <i class="fas fa-exclamation-triangle"></i> {{ user_form.username.errors.0 }}
-                            </div>
-                        {% endif %}
-                    </div>
-                    
-                    <!-- Password Field -->
-                    <div class="mb-4">
-                        <label for="{{ user_form.password1.id_for_label }}" class="form-label text-white mb-2" style="font-weight: 700; font-size: 1.05rem;">
-                            <i class="fas fa-lock" style="color: var(--uefa-gold);"></i> Password
-                        </label>
-                        {{ user_form.password1 }}
-                        {% if user_form.password1.errors %}
-                            <div class="text-warning mt-2" style="font-weight: 600;">
-                                <i class="fas fa-exclamation-triangle"></i> {{ user_form.password1.errors.0 }}
-                            </div>
-                        {% endif %}
-                    </div>
-                    
-                    <!-- Confirm Password Field -->
-                    <div class="mb-5">
-                        <label for="{{ user_form.password2.id_for_label }}" class="form-label text-white mb-2" style="font-weight: 700; font-size: 1.05rem;">
-                            <i class="fas fa-lock" style="color: var(--uefa-gold);"></i> Confirm Password
-                        </label>
-                        {{ user_form.password2 }}
-                        {% if user_form.password2.errors %}
-                            <div class="text-warning mt-2" style="font-weight: 600;">
-                                <i class="fas fa-exclamation-triangle"></i> {{ user_form.password2.errors.0 }}
-                            </div>
-                        {% endif %}
-                    </div>
-                    
-                    <!-- Submit Button -->
-                    <div class="d-grid">
-                        <button type="submit" class="btn btn-uefa btn-lg" style="background: linear-gradient(135deg, var(--uefa-gold), #FFA500); border: none; padding: 1rem;">
-                            <i class="fas fa-rocket"></i> Create Account
-                        </button>
-                    </div>
-                </form>
-                
-                <hr style="border-color: rgba(255,255,255,0.3); margin: 2.5rem 0 1.5rem 0;">
-                
-                <!-- Login Link -->
-                <div class="text-center">
-                    <p class="text-light mb-0" style="font-size: 1.05rem;">
-                        Already have an account? 
-                        <a href="{% url 'login' %}?next={% url 'project:home' %}" class="text-uefa-gold text-decoration-none fw-bold" style="text-shadow: 0 2px 4px rgba(0,0,0,0.3);">Login here</a>
-                    </p>
+                <div class="field">
+                    <label for="{{ user_form.password1.id_for_label }}">Password</label>
+                    {{ user_form.password1 }}
+                    {{ user_form.password1.errors }}
+                    <span class="help">At least 8 characters, not all numbers, and not too common.</span>
                 </div>
-            </div>
+                <div class="field">
+                    <label for="{{ user_form.password2.id_for_label }}">Confirm password</label>
+                    {{ user_form.password2 }}
+                    {{ user_form.password2.errors }}
+                </div>
+                <button type="submit" class="btn btn-dark">Create account <span class="arrow">→</span></button>
+            </form>
+            <p class="switch">Already have an account? <a class="text-link" href="{% url 'login' %}">Log in</a></p>
         </div>
-        
-        <!-- Benefits Card -->
-        <div class="uefa-card benefits-card mt-4">
-            <div class="uefa-card-body p-4">
-                <h5 class="text-center mb-4" style="font-weight: 800; font-size: 1.5rem; color: var(--uefa-white);">
-                    <i class="fas fa-trophy" style="color: var(--uefa-gold);"></i> What you'll get:
-                </h5>
-                <div class="row g-3">
-                    <div class="col-md-6">
-                        <div class="d-flex align-items-center mb-3">
-                            <i class="fas fa-check-circle text-success me-3" style="font-size: 1.5rem;"></i>
-                            <span style="font-weight: 600; color: var(--uefa-white);">Save your match predictions</span>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="d-flex align-items-center mb-3">
-                            <i class="fas fa-check-circle text-success me-3" style="font-size: 1.5rem;"></i>
-                            <span style="font-weight: 600; color: var(--uefa-white);">Track your favorite teams</span>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="d-flex align-items-center mb-3">
-                            <i class="fas fa-check-circle text-success me-3" style="font-size: 1.5rem;"></i>
-                            <span style="font-weight: 600; color: var(--uefa-white);">Access AI-powered predictions</span>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="d-flex align-items-center mb-3">
-                            <i class="fas fa-check-circle text-success me-3" style="font-size: 1.5rem;"></i>
-                            <span style="font-weight: 600; color: var(--uefa-white);">View Champions League analytics</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
+        <div class="panel dark">
+            <p class="eyebrow">What you get</p>
+            <ul class="perks">
+                <li>Your predictions saved to your profile</li>
+                <li>Machine-learning calls for any matchup</li>
+                <li>Team stats, player rankings and live results</li>
+            </ul>
         </div>
     </div>
-</div>
+</section>
 {% endblock %}
