@@ -1,133 +1,50 @@
 {% extends 'project/base.html' %}
 
-{% block title %}Player Rankings - UCLPredict{% endblock %}
+{% block title %}Player rankings · UCLPredict{% endblock %}
 
 {% block content %}
-<div class="mb-4">
-    <h1 class="page-title"><i class="fas fa-users"></i> Top Player Rankings</h1>
-    <p class="page-subtitle">Champions League's elite performers ranked by Goals + Assists per 90 minutes</p>
-</div>
-
-{% if players %}
-<div class="uefa-card">
-    <div class="uefa-card-header">
-        <i class="fas fa-trophy"></i> Champions League Player Statistics
-        <span class="badge badge-uefa badge-warning-uefa ms-2" style="font-size: 0.75rem;">
-            <i class="fas fa-users"></i> {{ players|length }} Players
-        </span>
+<section class="dark page-head">
+    <div class="wrap">
+        <p class="eyebrow">Player rankings · {{ players|length }} players</p>
+        <h1 class="display">Who makes the <span class="accent">difference.</span></h1>
+        <p class="lede">Champions League attackers and creators ranked by goals plus assists per 90 minutes.</p>
     </div>
-    <div class="uefa-card-body p-0">
-        <div class="table-responsive">
-            <table class="table uefa-table mb-0">
+</section>
+
+<section class="section">
+    <div class="wrap">
+        {% if players %}
+        <div class="panel flush table-wrap">
+            <table class="data">
                 <thead>
                     <tr>
-                        <th style="width: 100px;">Rank</th>
-                        <th>Player Name</th>
+                        <th>#</th>
+                        <th>Player</th>
                         <th>Team</th>
-                        <th>Position</th>
-                        <th class="text-center">G+A per 90</th>
+                        <th class="hide-sm">Position</th>
+                        <th class="num">G+A / 90</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for player in players %}
                     <tr>
-                        <td>
-                            {% if player.rank_int <= 3 %}
-                            <span class="rank-badge top-3">{{ player.rank_int }}</span>
-                            {% else %}
-                            <span class="rank-badge">{{ player.rank_int }}</span>
-                            {% endif %}
-                        </td>
-                        <td>
-                            <strong style="font-size: 1.05rem; color: var(--uefa-white);">{{ player.player_name }}</strong>
-                            {% if player.rank_int <= 3 %}
-                            <i class="fas fa-trophy text-warning ms-2" style="font-size: 0.85rem; color: var(--uefa-gold);"></i>
-                            {% endif %}
-                        </td>
-                        <td>
-                            <a href="{% url 'project:team_detail' player.team.pk %}" class="text-uefa-blue fw-bold" style="text-decoration: none;">
-                                <i class="fas fa-shield-alt"></i> {{ player.team.name }}
-                            </a>
-                        </td>
-                        <td>
-                            <span class="badge badge-uefa 
-                                {% if player.position == 'FWD' %}badge-primary-uefa
-                                {% elif player.position == 'MID' %}badge-success-uefa
-                                {% elif player.position == 'DEF' %}badge-warning-uefa
-                                {% else %}badge-uefa{% endif %}">
-                                <i class="fas fa-{% if player.position == 'FWD' %}bolt{% elif player.position == 'MID' %}cog{% elif player.position == 'DEF' %}shield-alt{% else %}user{% endif %}"></i>
-                                {{ player.get_position_display }}
-                            </span>
-                        </td>
-                        <td class="text-center">
-                            <span class="badge badge-uefa badge-success-uefa" style="font-size: 1rem; padding: 0.6rem 1rem;">
-                                <i class="fas fa-chart-line"></i> {{ player.ga_per_90 }}
-                            </span>
-                        </td>
-                    </tr>
-                    {% empty %}
-                    <tr>
-                        <td colspan="5" class="text-center py-5">
-                            <div class="d-flex justify-content-center mb-3">
-                                <div class="ucl-trophy" style="opacity: 0.9;"></div>
-                            </div>
-                            <p class="text-muted" style="color: rgba(232, 234, 237, 0.7);">No players available.</p>
-                        </td>
+                        <td><span class="rank{% if player.rank_int <= 3 %} top{% endif %}">{{ player.rank_int }}</span></td>
+                        <td class="strong">{{ player.player_name }}</td>
+                        <td><a class="team-inline" href="{% url 'project:team_detail' player.team.pk %}">{% include 'project/_crest.html' with team=player.team size='crest-sm' %}<span class="hide-sm">{{ player.team.name }}</span></a></td>
+                        <td class="hide-sm"><span class="tag tag-{{ player.position }}">{{ player.get_position_display }}</span></td>
+                        <td class="num">{{ player.ga_per_90 }}</td>
                     </tr>
                     {% endfor %}
                 </tbody>
             </table>
         </div>
-    </div>
-</div>
-
-<div class="mt-4 mb-3">
-    <div class="uefa-card">
-        <div class="uefa-card-body">
-            <div class="row text-center">
-                <div class="col-md-4 mb-3 mb-md-0">
-                    <div style="font-size: 2.5rem; color: var(--uefa-blue); margin-bottom: 0.5rem;">
-                        <i class="fas fa-trophy"></i>
-                    </div>
-                    <h5 style="color: var(--uefa-white); font-weight: 700;">Elite Performers</h5>
-                    <p class="text-muted small" style="color: rgba(232, 234, 237, 0.7);">Top players with exceptional G+A per 90 stats</p>
-                </div>
-                <div class="col-md-4 mb-3 mb-md-0">
-                    <div style="font-size: 2.5rem; color: var(--uefa-blue); margin-bottom: 0.5rem;">
-                        <i class="fas fa-chart-bar"></i>
-                    </div>
-                    <h5 style="color: var(--uefa-white); font-weight: 700;">Performance Metrics</h5>
-                    <p class="text-muted small" style="color: rgba(232, 234, 237, 0.7);">Goals and assists per 90 minutes played</p>
-                </div>
-                <div class="col-md-4">
-                    <div style="font-size: 2.5rem; color: var(--uefa-gold); margin-bottom: 0.5rem;">
-                        <i class="fas fa-trophy"></i>
-                    </div>
-                    <h5 style="color: var(--uefa-white); font-weight: 700;">Champions League</h5>
-                    <p class="text-muted small" style="color: rgba(232, 234, 237, 0.7);">Statistics from Europe's premier competition</p>
-                </div>
-            </div>
+        <p class="eyebrow" style="margin-top: 16px;">G+A / 90 = goals plus assists per 90 minutes played</p>
+        {% else %}
+        <div class="panel empty">
+            <h3>No players yet</h3>
+            <p>Player statistics aren't available right now.</p>
         </div>
+        {% endif %}
     </div>
-</div>
-{% else %}
-<div class="uefa-card">
-    <div class="uefa-card-body text-center py-5">
-        <div class="d-flex justify-content-center mb-4">
-            <div class="ucl-trophy" style="opacity: 0.9;"></div>
-        </div>
-        <h3 class="mb-3" style="color: var(--uefa-white); font-weight: 800;">No players available</h3>
-        <p class="text-muted mb-4" style="color: rgba(232, 234, 237, 0.7);">Player statistics are not available at the moment.</p>
-    </div>
-</div>
-{% endif %}
-
-<div class="mt-4 d-flex gap-2">
-    <a href="{% url 'project:home' %}" class="btn btn-uefa-outline">
-        <i class="fas fa-home"></i> Back to Home
-    </a>
-    <a href="{% url 'project:team_list' %}" class="btn btn-uefa-outline">
-        <i class="fas fa-shield-alt"></i> View Teams
-    </a>
-</div>
+</section>
 {% endblock %}

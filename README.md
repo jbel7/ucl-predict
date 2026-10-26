@@ -1,88 +1,33 @@
 # UCLPredict
 
-Champions League Analytics & AI-Powered Match Predictions
+A Django web app for UEFA Champions League analytics and match predictions. Browse clubs, player rankings and recent results, then pick any two teams and a machine-learning model predicts the outcome with win, draw and loss probabilities. Signed-in users get their predictions saved to their profile.
 
-[![Live Demo](https://img.shields.io/badge/Live-Demo-success?style=for-the-badge)](https://cs-webapps.bu.edu/belsanyj/project/)
+## How it's built
 
-**Live Application**: [https://cs-webapps.bu.edu/belsanyj/project/](https://cs-webapps.bu.edu/belsanyj/project/)
+- Django app (`project/`) with eight models covering teams, club stats, player rankings, matches, Champions League season records and saved predictions.
+- Prediction model: a scikit-learn gradient boosting classifier trained on five seasons of Champions League records (`train_ml_model.py`), loaded by `ml_predictor.py`.
+- Optional live results from the football-data.org API, with a fallback to the app's own database when no key is set.
+- Django auth for sign up, login and saved predictions.
+- Plain HTML templates and one CSS file, with no front-end framework.
 
----
+## Run it locally
 
-## About
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+export DJANGO_DEBUG=true
+python manage.py migrate
+python manage.py loaddata ucl_data
+python manage.py runserver
+```
 
-UCLPredict is a web application for Champions League football analytics and match predictions. The platform provides detailed information on teams, players, matches, and includes a match prediction feature.
+Then open http://localhost:8000.
 
----
+Optional: get a free key at football-data.org and `export FOOTBALL_DATA_API_KEY=...` for live match data. For anything other than local development, set the variables in `.env.example`.
 
-## Features
+Run the tests with `python manage.py test project`.
 
-### Teams
-- Browse Champions League teams
-- View team details including:
-  - Country and domestic league
-  - Team logos
-  - Squad information
-- Featured teams include Arsenal, Barcelona, Bayern Munich, Inter Milan, Galatasaray, and more
+## Author
 
-### Players
-- Player rankings and statistics
-- Goals + Assists per 90 minutes metric
-- Position information
-- Team affiliations
-- Top players include Harry Kane, Kylian Mbappé, Erling Haaland, Mohamed Salah, and Jude Bellingham
-
-### Matches
-- View upcoming Champions League fixtures
-- Match details including:
-  - Date and time
-  - Home and away teams
-  - Matchup information
-- Featured matchups displayed on homepage
-
-### Predictor
-- AI-powered match prediction tool
-- Accessible through dedicated predictor page
-
-### User Accounts
-- User registration (Sign Up)
-- User authentication (Login)
-- Personalized access to features
-
----
-
-## Navigation
-
-The application includes the following main pages:
-- **Home**: Overview with featured teams, top players, and upcoming matches
-- **Teams**: Complete list of participating teams
-- **Players**: Player statistics and rankings
-- **Matches**: Match schedule and results
-- **Predictor**: Match prediction tool
-- **Sign Up**: User registration
-- **Login**: User authentication
-
-
-
----
-
-## Usage
-
-1. Visit the homepage to browse featured teams and players
-2. Navigate to Teams page to view all Champions League clubs
-3. Check the Players section for detailed statistics
-4. View upcoming matches in the Matches section
-5. Use the Predictor tool to forecast match outcomes
-6. Create an account to access additional features
-
----
-
-## Contact
-
-**Jed Belsany**
-- Email: belsanyj@bu.edu
-- GitHub: [@jbel7](https://github.com/jbel7)
-
-**Project Repository**: [https://github.com/jbel7/ucl-predict](https://github.com/jbel7/ucl-predict)
-
----
-
+Jed Belsany · [github.com/jbel7](https://github.com/jbel7)

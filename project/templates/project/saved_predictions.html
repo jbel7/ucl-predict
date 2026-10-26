@@ -1,66 +1,49 @@
 {% extends 'project/base.html' %}
 
-{% block title %}My Predictions - UCLPredict{% endblock %}
+{% block title %}My predictions · UCLPredict{% endblock %}
 
 {% block content %}
-<div class="mb-4">
-    <h1 class="page-title">My Saved Predictions</h1>
-    <p class="page-subtitle">View and manage all your saved match predictions</p>
-</div>
-
-{% if predictions %}
-<div class="uefa-card">
-    <div class="uefa-card-header">
-        <i class="fas fa-list"></i> Total Predictions: {{ predictions|length }}
+<section class="dark page-head">
+    <div class="wrap">
+        <p class="eyebrow">{{ user.username }} · {{ predictions|length }} saved</p>
+        <h1 class="display">My <span class="accent">predictions.</span></h1>
+        <p class="lede">Every matchup you've run through the model while logged in.</p>
     </div>
-    <div class="uefa-card-body p-0">
-        <div class="table-responsive">
-            <table class="table uefa-table mb-0">
+</section>
+
+<section class="section">
+    <div class="wrap">
+        {% if predictions %}
+        <div class="panel flush table-wrap">
+            <table class="data">
                 <thead>
                     <tr>
-                        <th>Date & Time</th>
+                        <th class="hide-sm">Saved</th>
                         <th>Match</th>
-                        <th class="text-center">Prediction</th>
-                        <th class="text-center">Confidence</th>
-                        <th class="text-center">Actions</th>
+                        <th>Prediction</th>
+                        <th class="num">Confidence</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for prediction in predictions %}
                     <tr>
+                        <td class="mono small hide-sm" style="white-space: nowrap;">{{ prediction.timestamp|date:"M j, Y" }}<span class="result-note">{{ prediction.timestamp|date:"H:i" }}</span></td>
                         <td>
-                            <div style="font-weight: 500;">{{ prediction.timestamp|date:"M d, Y" }}</div>
-                            <small class="text-muted">{{ prediction.timestamp|date:"H:i" }}</small>
+                            <span class="team-inline">{% include 'project/_crest.html' with team=prediction.team_a size='crest-sm' %}<span class="strong">{{ prediction.team_a.name }}</span></span>
+                            <span class="vs" style="margin: 0 6px;">v</span>
+                            <span class="team-inline">{% include 'project/_crest.html' with team=prediction.team_b size='crest-sm' %}<span class="strong">{{ prediction.team_b.name }}</span></span>
                         </td>
                         <td>
-                            <div class="d-flex align-items-center">
-                                <strong class="me-2" style="color: var(--uefa-white);">{{ prediction.team_a.name }}</strong>
-                                <span class="badge badge-uefa badge-warning-uefa mx-2"><i class="fas fa-trophy"></i> VS</span>
-                                <strong style="color: var(--uefa-white);">{{ prediction.team_b.name }}</strong>
-                            </div>
-                        </td>
-                        <td class="text-center">
-                            <span class="badge badge-uefa {% if prediction.predicted_result == 'TEAM_A_WIN' %}badge-primary-uefa{% elif prediction.predicted_result == 'TEAM_B_WIN' %}badge-primary-uefa{% else %}badge-warning-uefa{% endif %}">
-                                {% if prediction.predicted_result == 'TEAM_A_WIN' %}
-                                    <i class="fas fa-trophy"></i> {{ prediction.team_a.name }} Win
-                                {% elif prediction.predicted_result == 'TEAM_B_WIN' %}
-                                    <i class="fas fa-trophy"></i> {{ prediction.team_b.name }} Win
-                                {% else %}
-                                    <i class="fas fa-handshake"></i> Draw
-                                {% endif %}
+                            <span class="tag {% if prediction.predicted_result == 'DRAW' %}{% else %}tag-win{% endif %}">
+                                {% if prediction.predicted_result == 'TEAM_A_WIN' %}{{ prediction.team_a.name }} win{% elif prediction.predicted_result == 'TEAM_B_WIN' %}{{ prediction.team_b.name }} win{% else %}Draw{% endif %}
                             </span>
                         </td>
-                        <td class="text-center">
-                            <span class="badge badge-uefa badge-success-uefa">
-                                <i class="fas fa-chart-line"></i> {{ prediction.model_confidence }}%
-                            </span>
-                        </td>
-                        <td class="text-center">
-                            <form method="post" action="{% url 'project:delete_prediction' prediction.pk %}" style="display: inline;" onsubmit="return confirm('Are you sure you want to delete this prediction?');">
+                        <td class="num">{{ prediction.model_confidence|floatformat:1 }}%</td>
+                        <td class="num">
+                            <form method="post" action="{% url 'project:delete_prediction' prediction.pk %}" onsubmit="return confirm('Delete this prediction?');">
                                 {% csrf_token %}
-                                <button type="submit" class="btn btn-danger-uefa" title="Delete prediction">
-                                    <i class="fas fa-trash-alt"></i> Delete
-                                </button>
+                                <button type="submit" class="btn btn-sm btn-danger">Delete</button>
                             </form>
                         </td>
                     </tr>
@@ -68,29 +51,16 @@
                 </tbody>
             </table>
         </div>
-    </div>
-</div>
-{% else %}
-<div class="uefa-card">
-    <div class="uefa-card-body text-center py-5">
-        <div class="d-flex justify-content-center mb-4">
-            <div class="ucl-trophy" style="opacity: 0.9;"></div>
+        <div class="btn-row" style="margin-top: 24px;">
+            <a href="{% url 'project:predictor' %}" class="btn">Make another prediction <span class="arrow">→</span></a>
         </div>
-        <h3 class="mb-3" style="color: var(--uefa-white); font-weight: 800;">No predictions yet</h3>
-        <p class="text-muted mb-4" style="color: rgba(232, 234, 237, 0.7);">Start making predictions to see them saved here!</p>
-        <a href="{% url 'project:predictor' %}" class="btn btn-uefa">
-            <i class="fas fa-magic"></i> Make Your First Prediction
-        </a>
+        {% else %}
+        <div class="panel empty">
+            <h3>No predictions yet</h3>
+            <p>Run a matchup through the predictor and it'll be saved here.</p>
+            <a href="{% url 'project:predictor' %}" class="btn btn-dark">Make your first prediction <span class="arrow">→</span></a>
+        </div>
+        {% endif %}
     </div>
-</div>
-{% endif %}
-
-<div class="mt-4 d-flex gap-2">
-    <a href="{% url 'project:predictor' %}" class="btn btn-uefa-outline">
-        <i class="fas fa-plus"></i> Make Another Prediction
-    </a>
-    <a href="{% url 'project:home' %}" class="btn btn-uefa-outline">
-        <i class="fas fa-home"></i> Back to Home
-    </a>
-</div>
+</section>
 {% endblock %}

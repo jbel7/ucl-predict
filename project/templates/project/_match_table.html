@@ -1,0 +1,40 @@
+<div class="panel flush table-wrap">
+    <table class="data">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Match</th>
+                <th class="center">Score</th>
+                <th class="hide-sm">Stage</th>
+                <th class="hide-sm">Scorers</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for match in matches %}
+            <tr>
+                <td class="mono small" style="white-space: nowrap;">{{ match.date|date:"M j, Y" }}<span class="result-note">{{ match.date|date:"H:i" }}</span></td>
+                <td>
+                    <span class="strong">{{ match.home_team }}</span>
+                    <span class="vs" style="margin: 0 6px;">v</span>
+                    <span class="strong">{{ match.away_team }}</span>
+                </td>
+                <td class="center">
+                    <span class="score">{{ match.home_score }}<span style="opacity:.5">–</span>{{ match.away_score }}</span>
+                    <span class="result-note">{% if match.home_score > match.away_score %}{{ match.home_team }} win{% elif match.home_score < match.away_score %}{{ match.away_team }} win{% else %}Draw{% endif %}</span>
+                </td>
+                <td class="hide-sm">
+                    <span class="tag">{% if match.stage == 'GROUP' %}Group stage{% elif match.stage == 'R16' %}Round of 16{% elif match.stage == 'QF' %}Quarter-final{% elif match.stage == 'SF' %}Semi-final{% elif match.stage == 'FINAL' %}Final{% else %}{{ match.stage }}{% endif %}</span>
+                </td>
+                <td class="hide-sm small">
+                    {% if match.scorers.home or match.scorers.away %}
+                        {% if match.scorers.home %}<div><span class="muted">{{ match.home_team }}:</span> {{ match.scorers.home }}</div>{% endif %}
+                        {% if match.scorers.away %}<div><span class="muted">{{ match.away_team }}:</span> {{ match.scorers.away }}</div>{% endif %}
+                    {% else %}
+                        <span class="muted">—</span>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>

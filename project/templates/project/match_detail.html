@@ -1,0 +1,48 @@
+{% extends 'project/base.html' %}
+
+{% block title %}{{ match.team_a.name }} vs {{ match.team_b.name }} · UCLPredict{% endblock %}
+
+{% block content %}
+<section class="dark page-head">
+    <div class="wrap">
+        <a class="eyebrow back-link" href="{% url 'project:home' %}">← Home</a>
+        <p class="eyebrow">{{ match.get_tournament_stage_display|default:"Champions League" }}{% if match.match_date %} · {{ match.match_date|date:"l, F j · H:i" }} UTC{% endif %}</p>
+
+        <div class="result-match" style="margin-top: 32px;">
+            <a class="fixture-team" href="{% url 'project:team_detail' match.team_a.pk %}">
+                {% include 'project/_crest.html' with team=match.team_a size='crest-xl' %}
+                <span class="h2">{{ match.team_a.name }}</span>
+            </a>
+            <span class="vs">VS</span>
+            <a class="fixture-team" href="{% url 'project:team_detail' match.team_b.pk %}">
+                {% include 'project/_crest.html' with team=match.team_b size='crest-xl' %}
+                <span class="h2">{{ match.team_b.name }}</span>
+            </a>
+        </div>
+
+        <form method="post" action="{% url 'project:predictor' %}" class="btn-row" style="justify-content: center;">
+            {% csrf_token %}
+            <input type="hidden" name="team_a" value="{{ match.team_a.pk }}">
+            <input type="hidden" name="team_b" value="{{ match.team_b.pk }}">
+            <button type="submit" class="btn btn-primary">Predict this match <span class="arrow">→</span></button>
+        </form>
+    </div>
+</section>
+
+<section class="section">
+    <div class="wrap grid grid-2">
+        <a class="team-card" href="{% url 'project:team_detail' match.team_a.pk %}">
+            <p class="eyebrow">Home</p>
+            <h3>{{ match.team_a.name }}</h3>
+            <p class="muted small">{{ match.team_a.league }} · {{ match.team_a.country }}</p>
+            <span class="meta"><span class="eyebrow">Team stats &amp; form</span><span class="go mono">→</span></span>
+        </a>
+        <a class="team-card" href="{% url 'project:team_detail' match.team_b.pk %}">
+            <p class="eyebrow">Away</p>
+            <h3>{{ match.team_b.name }}</h3>
+            <p class="muted small">{{ match.team_b.league }} · {{ match.team_b.country }}</p>
+            <span class="meta"><span class="eyebrow">Team stats &amp; form</span><span class="go mono">→</span></span>
+        </a>
+    </div>
+</section>
+{% endblock %}
