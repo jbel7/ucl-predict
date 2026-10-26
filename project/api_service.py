@@ -383,6 +383,10 @@ def get_all_recent_matches_from_db(limit=50):
         matches = ChampionsLeagueMatch.objects.filter(
             season=current_season
         ).order_by('-match_date')[:limit]
+        # Stored seasons use the "2024-25" format, so the filter above can miss;
+        # fall back to the most recent matches on record.
+        if not matches:
+            matches = ChampionsLeagueMatch.objects.order_by('-match_date')[:limit]
         
         return [{
             'date': m.match_date,
@@ -414,6 +418,10 @@ def get_team_matches_from_db(team_name, season=None):
             (Q(team_a=team) | Q(team_b=team)),
             season=season
         ).order_by('-match_date')[:10]
+        if not matches:
+            matches = ChampionsLeagueMatch.objects.filter(
+                Q(team_a=team) | Q(team_b=team)
+            ).order_by('-match_date')[:10]
         
         return [{
             'date': m.match_date,
