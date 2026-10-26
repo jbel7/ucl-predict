@@ -1,0 +1,742 @@
+[
+{
+ "model": "project.team",
+ "pk": 1,
+ "fields": {
+  "name": "Arsenal",
+  "country": "England",
+  "league": "Premier League",
+  "logo_url": "https://upload.wikimedia.org/wikipedia/en/thumb/5/53/Arsenal_FC.svg/250px-Arsenal_FC.svg.png"
+ }
+},
+{
+ "model": "project.team",
+ "pk": 2,
+ "fields": {
+  "name": "Manchester City",
+  "country": "England",
+  "league": "Premier League",
+  "logo_url": "https://upload.wikimedia.org/wikipedia/en/thumb/e/eb/Manchester_City_FC_badge.svg/1200px-Manchester_City_FC_badge.svg.png"
+ }
+},
+{
+ "model": "project.team",
+ "pk": 3,
+ "fields": {
+  "name": "Liverpool",
+  "country": "England",
+  "league": "Premier League",
+  "logo_url": "https://upload.wikimedia.org/wikipedia/en/thumb/0/0c/Liverpool_FC.svg/879px-Liverpool_FC.svg.png"
+ }
+},
+{
+ "model": "project.team",
+ "pk": 4,
+ "fields": {
+  "name": "Real Madrid",
+  "country": "Spain",
+  "league": "La Liga",
+  "logo_url": "https://upload.wikimedia.org/wikipedia/en/thumb/5/56/Real_Madrid_CF.svg/250px-Real_Madrid_CF.svg.png"
+ }
+},
+{
+ "model": "project.team",
+ "pk": 5,
+ "fields": {
+  "name": "Barcelona",
+  "country": "Spain",
+  "league": "La Liga",
+  "logo_url": "https://upload.wikimedia.org/wikipedia/en/thumb/4/47/FC_Barcelona_%28crest%29.svg/1183px-FC_Barcelona_%28crest%29.svg.png"
+ }
+},
+{
+ "model": "project.team",
+ "pk": 6,
+ "fields": {
+  "name": "Bayern Munich",
+  "country": "Germany",
+  "league": "Bundesliga",
+  "logo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/FC_Bayern_M%C3%BCnchen_logo_%282024%29.svg/1200px-FC_Bayern_M%C3%BCnchen_logo_%282024%29.svg.png"
+ }
+},
+{
+ "model": "project.team",
+ "pk": 7,
+ "fields": {
+  "name": "PSG",
+  "country": "France",
+  "league": "Ligue 1",
+  "logo_url": "https://upload.wikimedia.org/wikipedia/en/a/a7/Paris_Saint-Germain_F.C..svg"
+ }
+},
+{
+ "model": "project.team",
+ "pk": 8,
+ "fields": {
+  "name": "Galatasaray",
+  "country": "Turkey",
+  "league": "Süper Lig",
+  "logo_url": "https://upload.wikimedia.org/wikipedia/en/4/49/Galatasaray_SK_football_logo.png"
+ }
+},
+{
+ "model": "project.team",
+ "pk": 9,
+ "fields": {
+  "name": "Inter Milan",
+  "country": "Italy",
+  "league": "Serie A",
+  "logo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/FC_Internazionale_Milano_2021.svg/250px-FC_Internazionale_Milano_2021.svg.png"
+ }
+},
+{
+ "model": "project.teamstatistic",
+ "pk": 1,
+ "fields": {
+  "team": 1,
+  "ucl_titles": 0,
+  "ucl_finals": 1,
+  "founded_year": 1886,
+  "stadium_name": "Emirates Stadium",
+  "stadium_capacity": 60704,
+  "coach": null
+ }
+},
+{
+ "model": "project.teamstatistic",
+ "pk": 2,
+ "fields": {
+  "team": 4,
+  "ucl_titles": 15,
+  "ucl_finals": 18,
+  "founded_year": 1902,
+  "stadium_name": "Santiago Bernabéu",
+  "stadium_capacity": 83186,
+  "coach": "Carlo Ancelotti"
+ }
+},
+{
+ "model": "project.teamstatistic",
+ "pk": 3,
+ "fields": {
+  "team": 6,
+  "ucl_titles": 6,
+  "ucl_finals": 11,
+  "founded_year": 1900,
+  "stadium_name": "Allianz Arena",
+  "stadium_capacity": 75024,
+  "coach": "Thomas Tuchel"
+ }
+},
+{
+ "model": "project.teamstatistic",
+ "pk": 4,
+ "fields": {
+  "team": 5,
+  "ucl_titles": 5,
+  "ucl_finals": 8,
+  "founded_year": 1899,
+  "stadium_name": "Camp Nou",
+  "stadium_capacity": 99354,
+  "coach": "Xavi"
+ }
+},
+{
+ "model": "project.teamstatistic",
+ "pk": 5,
+ "fields": {
+  "team": 2,
+  "ucl_titles": 1,
+  "ucl_finals": 2,
+  "founded_year": 1880,
+  "stadium_name": "Etihad Stadium",
+  "stadium_capacity": 53400,
+  "coach": "Pep Guardiola"
+ }
+},
+{
+ "model": "project.teamstatistic",
+ "pk": 6,
+ "fields": {
+  "team": 7,
+  "ucl_titles": 0,
+  "ucl_finals": 1,
+  "founded_year": 1970,
+  "stadium_name": "Parc des Princes",
+  "stadium_capacity": 47929,
+  "coach": "Luis Enrique"
+ }
+},
+{
+ "model": "project.playerranking",
+ "pk": 4,
+ "fields": {
+  "player_name": "Victor Osimhen",
+  "team": 8,
+  "rank_int": 9,
+  "position": "FWD",
+  "ga_per_90": "2.00"
+ }
+},
+{
+ "model": "project.playerranking",
+ "pk": 5,
+ "fields": {
+  "player_name": "Achraf Hakimi",
+  "team": 7,
+  "rank_int": 10,
+  "position": "DEF",
+  "ga_per_90": "0.53"
+ }
+},
+{
+ "model": "project.playerranking",
+ "pk": 6,
+ "fields": {
+  "player_name": "Lautaro Martinez",
+  "team": 9,
+  "rank_int": 11,
+  "position": "FWD",
+  "ga_per_90": "0.64"
+ }
+},
+{
+ "model": "project.playerranking",
+ "pk": 8,
+ "fields": {
+  "player_name": "Harry Kane",
+  "team": 6,
+  "rank_int": 1,
+  "position": "FWD",
+  "ga_per_90": "1.42"
+ }
+},
+{
+ "model": "project.playerranking",
+ "pk": 9,
+ "fields": {
+  "player_name": "Kylian Mbappe",
+  "team": 4,
+  "rank_int": 8,
+  "position": "FWD",
+  "ga_per_90": "0.65"
+ }
+},
+{
+ "model": "project.playerranking",
+ "pk": 10,
+ "fields": {
+  "player_name": "Erling Haaland",
+  "team": 2,
+  "rank_int": 3,
+  "position": "FWD",
+  "ga_per_90": "1.52"
+ }
+},
+{
+ "model": "project.playerranking",
+ "pk": 11,
+ "fields": {
+  "player_name": "Bukayo Saka",
+  "team": 1,
+  "rank_int": 12,
+  "position": "FWD",
+  "ga_per_90": "0.94"
+ }
+},
+{
+ "model": "project.playerranking",
+ "pk": 12,
+ "fields": {
+  "player_name": "Kylian Mbappé",
+  "team": 7,
+  "rank_int": 2,
+  "position": "FWD",
+  "ga_per_90": "1.45"
+ }
+},
+{
+ "model": "project.playerranking",
+ "pk": 13,
+ "fields": {
+  "player_name": "Mohamed Salah",
+  "team": 3,
+  "rank_int": 4,
+  "position": "FWD",
+  "ga_per_90": "1.38"
+ }
+},
+{
+ "model": "project.playerranking",
+ "pk": 14,
+ "fields": {
+  "player_name": "Jude Bellingham",
+  "team": 4,
+  "rank_int": 5,
+  "position": "MID",
+  "ga_per_90": "0.95"
+ }
+},
+{
+ "model": "project.playerranking",
+ "pk": 15,
+ "fields": {
+  "player_name": "Lamine Yamal",
+  "team": 5,
+  "rank_int": 6,
+  "position": "FWD",
+  "ga_per_90": "1.15"
+ }
+},
+{
+ "model": "project.playerranking",
+ "pk": 16,
+ "fields": {
+  "player_name": "Pedri",
+  "team": 5,
+  "rank_int": 7,
+  "position": "MID",
+  "ga_per_90": "0.72"
+ }
+},
+{
+ "model": "project.matchpredictiontemplate",
+ "pk": 1,
+ "fields": {
+  "team_a": 1,
+  "team_b": 6,
+  "match_date": "2025-12-09T12:00:00Z",
+  "tournament_stage": "GROUP"
+ }
+},
+{
+ "model": "project.matchpredictiontemplate",
+ "pk": 2,
+ "fields": {
+  "team_a": 3,
+  "team_b": 9,
+  "match_date": "2025-12-09T12:00:00Z",
+  "tournament_stage": "GROUP"
+ }
+},
+{
+ "model": "project.matchpredictiontemplate",
+ "pk": 3,
+ "fields": {
+  "team_a": 4,
+  "team_b": 2,
+  "match_date": "2025-12-10T15:00:00Z",
+  "tournament_stage": "GROUP"
+ }
+},
+{
+ "model": "project.championsleaguematch",
+ "pk": 1,
+ "fields": {
+  "team_a": 4,
+  "team_b": 6,
+  "match_date": "2025-11-24T22:52:09.259Z",
+  "tournament_stage": "R16",
+  "season": "2024-25",
+  "team_a_score": 2,
+  "team_b_score": 1,
+  "team_a_scorers": "Vinicius Jr, Rodrygo",
+  "team_b_scorers": "Kane"
+ }
+},
+{
+ "model": "project.championsleaguematch",
+ "pk": 2,
+ "fields": {
+  "team_a": 4,
+  "team_b": 7,
+  "match_date": "2025-11-09T22:52:09.259Z",
+  "tournament_stage": "GROUP",
+  "season": "2024-25",
+  "team_a_score": 3,
+  "team_b_score": 1,
+  "team_a_scorers": "Benzema, Vinicius Jr, Modric",
+  "team_b_scorers": "Mbappé"
+ }
+},
+{
+ "model": "project.championsleaguematch",
+ "pk": 3,
+ "fields": {
+  "team_a": 2,
+  "team_b": 4,
+  "match_date": "2025-10-25T22:52:09.259Z",
+  "tournament_stage": "GROUP",
+  "season": "2024-25",
+  "team_a_score": 1,
+  "team_b_score": 1,
+  "team_a_scorers": "Haaland",
+  "team_b_scorers": "Rodrygo"
+ }
+},
+{
+ "model": "project.championsleaguematch",
+ "pk": 4,
+ "fields": {
+  "team_a": 6,
+  "team_b": 8,
+  "match_date": "2025-10-25T22:52:09.259Z",
+  "tournament_stage": "GROUP",
+  "season": "2024-25",
+  "team_a_score": 3,
+  "team_b_score": 1,
+  "team_a_scorers": "Kane (2), Coman",
+  "team_b_scorers": "Icardi"
+ }
+},
+{
+ "model": "project.clrecord",
+ "pk": 1,
+ "fields": {
+  "team": 4,
+  "season": "2024-25",
+  "wins": 4,
+  "draws": 1,
+  "losses": 1,
+  "goals_for": 12,
+  "goals_against": 5,
+  "stage_reached": "Round of 16"
+ }
+},
+{
+ "model": "project.clrecord",
+ "pk": 2,
+ "fields": {
+  "team": 4,
+  "season": "2023-24",
+  "wins": 9,
+  "draws": 3,
+  "losses": 1,
+  "goals_for": 28,
+  "goals_against": 12,
+  "stage_reached": "Champions"
+ }
+},
+{
+ "model": "project.clrecord",
+ "pk": 3,
+ "fields": {
+  "team": 4,
+  "season": "2022-23",
+  "wins": 8,
+  "draws": 2,
+  "losses": 3,
+  "goals_for": 26,
+  "goals_against": 14,
+  "stage_reached": "Semi Finals"
+ }
+},
+{
+ "model": "project.clrecord",
+ "pk": 4,
+ "fields": {
+  "team": 4,
+  "season": "2021-22",
+  "wins": 9,
+  "draws": 0,
+  "losses": 4,
+  "goals_for": 28,
+  "goals_against": 14,
+  "stage_reached": "Champions"
+ }
+},
+{
+ "model": "project.clrecord",
+ "pk": 5,
+ "fields": {
+  "team": 4,
+  "season": "2020-21",
+  "wins": 6,
+  "draws": 2,
+  "losses": 2,
+  "goals_for": 19,
+  "goals_against": 11,
+  "stage_reached": "Semi Finals"
+ }
+},
+{
+ "model": "project.clrecord",
+ "pk": 6,
+ "fields": {
+  "team": 5,
+  "season": "2024-25",
+  "wins": 3,
+  "draws": 2,
+  "losses": 1,
+  "goals_for": 10,
+  "goals_against": 6,
+  "stage_reached": "Round of 16"
+ }
+},
+{
+ "model": "project.clrecord",
+ "pk": 7,
+ "fields": {
+  "team": 5,
+  "season": "2023-24",
+  "wins": 5,
+  "draws": 2,
+  "losses": 3,
+  "goals_for": 18,
+  "goals_against": 15,
+  "stage_reached": "Quarter Finals"
+ }
+},
+{
+ "model": "project.clrecord",
+ "pk": 8,
+ "fields": {
+  "team": 5,
+  "season": "2022-23",
+  "wins": 4,
+  "draws": 2,
+  "losses": 2,
+  "goals_for": 15,
+  "goals_against": 10,
+  "stage_reached": "Group Stage"
+ }
+},
+{
+ "model": "project.clrecord",
+ "pk": 9,
+ "fields": {
+  "team": 5,
+  "season": "2021-22",
+  "wins": 2,
+  "draws": 1,
+  "losses": 3,
+  "goals_for": 8,
+  "goals_against": 12,
+  "stage_reached": "Group Stage"
+ }
+},
+{
+ "model": "project.clrecord",
+ "pk": 10,
+ "fields": {
+  "team": 5,
+  "season": "2020-21",
+  "wins": 5,
+  "draws": 1,
+  "losses": 2,
+  "goals_for": 18,
+  "goals_against": 8,
+  "stage_reached": "Round of 16"
+ }
+},
+{
+ "model": "project.clrecord",
+ "pk": 11,
+ "fields": {
+  "team": 2,
+  "season": "2024-25",
+  "wins": 5,
+  "draws": 1,
+  "losses": 0,
+  "goals_for": 16,
+  "goals_against": 4,
+  "stage_reached": "Round of 16"
+ }
+},
+{
+ "model": "project.clrecord",
+ "pk": 12,
+ "fields": {
+  "team": 2,
+  "season": "2023-24",
+  "wins": 8,
+  "draws": 3,
+  "losses": 2,
+  "goals_for": 27,
+  "goals_against": 12,
+  "stage_reached": "Quarter Finals"
+ }
+},
+{
+ "model": "project.clrecord",
+ "pk": 13,
+ "fields": {
+  "team": 2,
+  "season": "2022-23",
+  "wins": 8,
+  "draws": 5,
+  "losses": 0,
+  "goals_for": 32,
+  "goals_against": 5,
+  "stage_reached": "Champions"
+ }
+},
+{
+ "model": "project.clrecord",
+ "pk": 14,
+ "fields": {
+  "team": 2,
+  "season": "2021-22",
+  "wins": 7,
+  "draws": 2,
+  "losses": 2,
+  "goals_for": 29,
+  "goals_against": 11,
+  "stage_reached": "Semi Finals"
+ }
+},
+{
+ "model": "project.clrecord",
+ "pk": 15,
+ "fields": {
+  "team": 2,
+  "season": "2020-21",
+  "wins": 7,
+  "draws": 0,
+  "losses": 1,
+  "goals_for": 25,
+  "goals_against": 4,
+  "stage_reached": "Final"
+ }
+},
+{
+ "model": "project.clrecord",
+ "pk": 16,
+ "fields": {
+  "team": 6,
+  "season": "2024-25",
+  "wins": 4,
+  "draws": 2,
+  "losses": 0,
+  "goals_for": 14,
+  "goals_against": 6,
+  "stage_reached": "Round of 16"
+ }
+},
+{
+ "model": "project.clrecord",
+ "pk": 17,
+ "fields": {
+  "team": 6,
+  "season": "2023-24",
+  "wins": 7,
+  "draws": 2,
+  "losses": 2,
+  "goals_for": 24,
+  "goals_against": 13,
+  "stage_reached": "Semi Finals"
+ }
+},
+{
+ "model": "project.clrecord",
+ "pk": 18,
+ "fields": {
+  "team": 6,
+  "season": "2022-23",
+  "wins": 7,
+  "draws": 2,
+  "losses": 1,
+  "goals_for": 21,
+  "goals_against": 8,
+  "stage_reached": "Quarter Finals"
+ }
+},
+{
+ "model": "project.clrecord",
+ "pk": 19,
+ "fields": {
+  "team": 6,
+  "season": "2021-22",
+  "wins": 8,
+  "draws": 0,
+  "losses": 1,
+  "goals_for": 31,
+  "goals_against": 8,
+  "stage_reached": "Quarter Finals"
+ }
+},
+{
+ "model": "project.clrecord",
+ "pk": 20,
+ "fields": {
+  "team": 6,
+  "season": "2020-21",
+  "wins": 9,
+  "draws": 1,
+  "losses": 1,
+  "goals_for": 27,
+  "goals_against": 8,
+  "stage_reached": "Champions"
+ }
+},
+{
+ "model": "project.clrecord",
+ "pk": 21,
+ "fields": {
+  "team": 7,
+  "season": "2024-25",
+  "wins": 3,
+  "draws": 2,
+  "losses": 1,
+  "goals_for": 11,
+  "goals_against": 7,
+  "stage_reached": "Round of 16"
+ }
+},
+{
+ "model": "project.clrecord",
+ "pk": 22,
+ "fields": {
+  "team": 7,
+  "season": "2023-24",
+  "wins": 4,
+  "draws": 2,
+  "losses": 2,
+  "goals_for": 15,
+  "goals_against": 9,
+  "stage_reached": "Semi Finals"
+ }
+},
+{
+ "model": "project.clrecord",
+ "pk": 23,
+ "fields": {
+  "team": 7,
+  "season": "2022-23",
+  "wins": 4,
+  "draws": 2,
+  "losses": 2,
+  "goals_for": 16,
+  "goals_against": 10,
+  "stage_reached": "Round of 16"
+ }
+},
+{
+ "model": "project.clrecord",
+ "pk": 24,
+ "fields": {
+  "team": 7,
+  "season": "2021-22",
+  "wins": 3,
+  "draws": 2,
+  "losses": 3,
+  "goals_for": 13,
+  "goals_against": 13,
+  "stage_reached": "Round of 16"
+ }
+},
+{
+ "model": "project.clrecord",
+ "pk": 25,
+ "fields": {
+  "team": 7,
+  "season": "2020-21",
+  "wins": 6,
+  "draws": 1,
+  "losses": 3,
+  "goals_for": 22,
+  "goals_against": 10,
+  "stage_reached": "Semi Finals"
+ }
+}
+]

@@ -1,0 +1,5 @@
+Django>=5.2,<7
+requests>=2.31
+numpy>=1.26
+# Must match the version ucl_predictor_model.pkl was trained with.
+scikit-learn==1.7.2
