@@ -2,6 +2,10 @@
 
 A Django web app for UEFA Champions League analytics and match predictions. Browse clubs, player rankings and recent results, then pick any two teams and a machine-learning model predicts the outcome with win, draw and loss probabilities. Signed-in users get their predictions saved to their profile.
 
+![UCLPredict homepage](docs/home.png)
+
+More screens: [team page](docs/team.png) · [match preview](docs/match.png) · [player rankings](docs/players.png)
+
 ## How it's built
 
 - Django app (`project/`) with eight models covering teams, club stats, player rankings, matches, Champions League season records and saved predictions.
