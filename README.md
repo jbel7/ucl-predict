@@ -8,7 +8,8 @@ More screens: [team page](docs/team.png) · [match preview](docs/match.png) · [
 
 ## How it's built
 
-- Django app (`project/`) with eight models covering teams, club stats, player rankings, matches, Champions League season records and saved predictions.
+- Django app (`project/`) with eight models covering teams, club stats, player stats, matches, Champions League season records and saved predictions.
+- Player rankings are computed, not stored: `project/rankings.py` ranks players by goals plus assists per appearance, with a minimum-appearances rule and tie-breakers. Stats are pulled from football-data.org by the `sync_players` command.
 - Prediction model: a scikit-learn gradient boosting classifier trained on five seasons of Champions League records (`train_ml_model.py`), loaded by `ml_predictor.py`.
 - Optional live results from the football-data.org API, with a fallback to the app's own database when no key is set.
 - Django auth for sign up, login and saved predictions.
@@ -28,7 +29,7 @@ python manage.py runserver
 
 Then open http://localhost:8000.
 
-Optional: get a free key at football-data.org and `export FOOTBALL_DATA_API_KEY=...` for live match data. For anything other than local development, set the variables in `.env.example`.
+Optional: get a free key at football-data.org and `export FOOTBALL_DATA_API_KEY=...` for live match data. With a key set, `python manage.py sync_players --season 2025` refreshes player stats (omit `--season` for the current season). For anything other than local development, set the variables in `.env.example`.
 
 Run the tests with `python manage.py test project`.
 
