@@ -9,6 +9,7 @@ class Team(models.Model):
     country = models.CharField(max_length=100)
     league = models.CharField(max_length=100)
     logo_url = models.URLField(max_length=500, blank=True, null=True)
+    api_id = models.IntegerField(unique=True, blank=True, null=True, help_text="football-data.org team id")
     
     def __str__(self):
         return self.name
@@ -35,7 +36,8 @@ class TeamStatistic(models.Model):
 
 
 class PlayerRanking(models.Model):
-    # Represents a player's ranking in the Champions League
+    # A player's Champions League stats for one season. Ranks are not stored;
+    # they are computed from these stats by project.rankings.ranked_players().
     POSITION_CHOICES = [
         ('GK', 'Goalkeeper'),
         ('DEF', 'Defender'),
@@ -43,17 +45,26 @@ class PlayerRanking(models.Model):
         ('FWD', 'Forward'),
     ]
     
+    api_id = models.IntegerField(unique=True, blank=True, null=True, help_text="football-data.org person id")
     player_name = models.CharField(max_length=100)
     team = models.ForeignKey(Team, on_delete=models.CASCADE, related_name='players')
-    rank_int = models.IntegerField(help_text="Overall ranking position")
-    position = models.CharField(max_length=3, choices=POSITION_CHOICES)
-    ga_per_90 = models.DecimalField(max_digits=5, decimal_places=2, help_text="Performance score")
+    position = models.CharField(max_length=3, choices=POSITION_CHOICES, blank=True)
+    season = models.CharField(max_length=20, blank=True, default='', help_text="e.g. '2025-26'")
+    goals = models.PositiveIntegerField(default=0)
+    assists = models.PositiveIntegerField(default=0)
+    penalties = models.PositiveIntegerField(default=0, help_text="Penalty goals (included in goals)")
+    matches_played = models.PositiveIntegerField(default=0)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    @property
+    def goal_contributions(self):
+        return self.goals + self.assists
     
     def __str__(self):
-        return f"{self.rank_int}. {self.player_name} ({self.team.name})"
+        return f"{self.player_name} ({self.team.name}, {self.season})"
     
     class Meta:
-        ordering = ['rank_int']
+        ordering = ['player_name']
 
 
 class MatchPredictionTemplate(models.Model):

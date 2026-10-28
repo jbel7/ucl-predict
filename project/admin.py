@@ -5,7 +5,7 @@ from .models import Team, PlayerRanking, MatchPredictionTemplate, FavoriteTeam, 
 
 @admin.register(Team)
 class TeamAdmin(admin.ModelAdmin):
-    list_display = ['name', 'country', 'league']
+    list_display = ['name', 'country', 'league', 'api_id']
     list_filter = ['country', 'league',]
     search_fields = ['name', 'country']
 
@@ -18,10 +18,9 @@ class TeamStatisticAdmin(admin.ModelAdmin):
 
 @admin.register(PlayerRanking)
 class PlayerRankingAdmin(admin.ModelAdmin):
-    list_display = ['rank_int', 'player_name', 'team', 'position', 'ga_per_90']
-    list_filter = ['position', 'team']
+    list_display = ['player_name', 'team', 'position', 'season', 'goals', 'assists', 'matches_played']
+    list_filter = ['season', 'position', 'team']
     search_fields = ['player_name']
-    ordering = ['rank_int']
 
 
 @admin.register(MatchPredictionTemplate)
