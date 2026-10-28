@@ -45,7 +45,7 @@ class PlayerRanking(models.Model):
         ('FWD', 'Forward'),
     ]
     
-    api_id = models.IntegerField(unique=True, blank=True, null=True, help_text="football-data.org person id")
+    api_id = models.IntegerField(blank=True, null=True, help_text="football-data.org person id")
     player_name = models.CharField(max_length=100)
     team = models.ForeignKey(Team, on_delete=models.CASCADE, related_name='players')
     position = models.CharField(max_length=3, choices=POSITION_CHOICES, blank=True)
@@ -65,6 +65,9 @@ class PlayerRanking(models.Model):
     
     class Meta:
         ordering = ['player_name']
+        constraints = [
+            models.UniqueConstraint(fields=['api_id', 'season'], name='one_row_per_player_per_season'),
+        ]
 
 
 class MatchPredictionTemplate(models.Model):

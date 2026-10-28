@@ -82,21 +82,29 @@ class Command(BaseCommand):
             kept.append((entry, team))
 
         with transaction.atomic():
-            seen = []
+            seen, changed = [], 0
             for entry, team in kept:
                 person = entry["player"]
-                player, _ = PlayerRanking.objects.update_or_create(
-                    api_id=person["id"],
-                    defaults={
-                        "player_name": person["name"],
-                        "team": team,
-                        "season": season_label,
-                        "goals": entry.get("goals") or 0,
-                        "assists": entry.get("assists") or 0,
-                        "penalties": entry.get("penalties") or 0,
-                        "matches_played": entry.get("playedMatches") or 0,
-                    },
+                stats = {
+                    "player_name": person["name"],
+                    "team": team,
+                    "goals": entry.get("goals") or 0,
+                    "assists": entry.get("assists") or 0,
+                    "penalties": entry.get("penalties") or 0,
+                    "matches_played": entry.get("playedMatches") or 0,
+                }
+                player, created = PlayerRanking.objects.get_or_create(
+                    api_id=person["id"], season=season_label, defaults=stats,
                 )
+                # Only write when something changed, so updated_at (and the
+                # fixture the daily sync commits) stays put on quiet days.
+                if created:
+                    changed += 1
+                elif any(getattr(player, k) != v for k, v in stats.items()):
+                    for k, v in stats.items():
+                        setattr(player, k, v)
+                    player.save()
+                    changed += 1
                 seen.append(player.pk)
             # Players who dropped out of this season's list, plus any
             # hand-entered rows with no season, no longer belong in the table.
@@ -107,7 +115,7 @@ class Command(BaseCommand):
         self.fill_positions(PlayerRanking.objects.filter(pk__in=seen, position=""))
 
         self.stdout.write(self.style.SUCCESS(
-            f"{season_label}: stored {len(seen)} players from our clubs "
+            f"{season_label}: {len(seen)} players from our clubs, {changed} new or updated "
             f"({skipped} from other clubs skipped, {removed} stale rows removed)."
         ))
 
@@ -150,9 +158,18 @@ class Command(BaseCommand):
 
     def fill_positions(self, players):
         players = list(players)
-        if players:
-            self.stdout.write(f"Looking up positions for {len(players)} players...")
+        # Reuse a position we already know from another season before asking the API.
+        known = dict(
+            PlayerRanking.objects.filter(api_id__in=[p.api_id for p in players])
+            .exclude(position="").values_list("api_id", "position")
+        )
+        lookups = [p for p in players if p.api_id not in known]
+        if lookups:
+            self.stdout.write(f"Looking up positions for {len(lookups)} players...")
         for player in players:
-            person = self.get(f"/persons/{player.api_id}")
-            player.position = map_position(person.get("position") or person.get("section"))
-            player.save(update_fields=["position"])
+            if player.api_id in known:
+                player.position = known[player.api_id]
+            else:
+                person = self.get(f"/persons/{player.api_id}")
+                player.position = map_position(person.get("position") or person.get("section"))
+            player.save(update_fields=["position", "updated_at"])

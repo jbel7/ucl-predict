@@ -7,7 +7,7 @@ from django.urls import reverse_lazy
 from django.db.models import Q
 from .models import Team, PlayerRanking, MatchPredictionTemplate, SavedPrediction, TeamStatistic, ChampionsLeagueMatch, CLRecord
 from .forms import PredictorForm
-from .rankings import ranked_players, min_matches_for, current_season
+from .rankings import available_seasons, current_season, min_matches_for, ranked_players
 from .api_service import get_team_matches_from_api, get_team_cl_record_from_api, get_all_recent_matches_from_api
 from ml_predictor import get_predictor
 
@@ -107,14 +107,22 @@ class PlayerRankingListView(ListView):
     template_name = 'project/player_list.html'
     context_object_name = 'players'
     
+    def get_season(self):
+        """?season=2025-26 picks a past season; anything else shows the current one."""
+        seasons = available_seasons()
+        requested = self.request.GET.get('season')
+        return requested if requested in seasons else (seasons[0] if seasons else None)
+
     def get_queryset(self):
-        return ranked_players()
+        self.season = self.get_season()
+        return ranked_players(self.season)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        season = current_season()
-        context['season'] = season
-        context['min_matches'] = min_matches_for(PlayerRanking.objects.filter(season=season))
+        context['season'] = self.season
+        context['seasons'] = available_seasons()
+        context['is_current'] = self.season == current_season()
+        context['min_matches'] = min_matches_for(PlayerRanking.objects.filter(season=self.season))
         return context
 
 
