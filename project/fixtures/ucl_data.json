@@ -769,6 +769,630 @@
  }
 },
 {
+ "model": "project.playerranking",
+ "pk": 54,
+ "fields": {
+  "api_id": 38101,
+  "player_name": "Erling Haaland",
+  "team": 2,
+  "position": "FWD",
+  "season": "2026-27",
+  "goals": 4,
+  "assists": 0,
+  "penalties": 0,
+  "matches_played": 3,
+  "updated_at": "2026-10-28T00:13:24.601Z"
+ }
+},
+{
+ "model": "project.playerranking",
+ "pk": 55,
+ "fields": {
+  "api_id": 8004,
+  "player_name": "Harry Kane",
+  "team": 6,
+  "position": "FWD",
+  "season": "2026-27",
+  "goals": 4,
+  "assists": 2,
+  "penalties": 2,
+  "matches_played": 3,
+  "updated_at": "2026-10-28T00:13:24.840Z"
+ }
+},
+{
+ "model": "project.playerranking",
+ "pk": 56,
+ "fields": {
+  "api_id": 3374,
+  "player_name": "Kylian Mbappé",
+  "team": 4,
+  "position": "FWD",
+  "season": "2026-27",
+  "goals": 3,
+  "assists": 1,
+  "penalties": 0,
+  "matches_played": 3,
+  "updated_at": "2026-10-28T00:13:25.458Z"
+ }
+},
+{
+ "model": "project.playerranking",
+ "pk": 57,
+ "fields": {
+  "api_id": 45681,
+  "player_name": "Alexis Mac Allister",
+  "team": 3,
+  "position": "MID",
+  "season": "2026-27",
+  "goals": 3,
+  "assists": 0,
+  "penalties": 0,
+  "matches_played": 3,
+  "updated_at": "2026-10-28T00:12:23.513Z"
+ }
+},
+{
+ "model": "project.playerranking",
+ "pk": 58,
+ "fields": {
+  "api_id": 3373,
+  "player_name": "Ousmane Dembélé",
+  "team": 7,
+  "position": "FWD",
+  "season": "2026-27",
+  "goals": 3,
+  "assists": 3,
+  "penalties": 0,
+  "matches_played": 3,
+  "updated_at": "2026-10-28T00:13:25.805Z"
+ }
+},
+{
+ "model": "project.playerranking",
+ "pk": 59,
+ "fields": {
+  "api_id": 33154,
+  "player_name": "Ferrán Torres",
+  "team": 7,
+  "position": "FWD",
+  "season": "2026-27",
+  "goals": 3,
+  "assists": 0,
+  "penalties": 0,
+  "matches_played": 3,
+  "updated_at": "2026-10-28T00:13:24.712Z"
+ }
+},
+{
+ "model": "project.playerranking",
+ "pk": 60,
+ "fields": {
+  "api_id": 172762,
+  "player_name": "Bradley Barcola",
+  "team": 3,
+  "position": "FWD",
+  "season": "2026-27",
+  "goals": 3,
+  "assists": 0,
+  "penalties": 0,
+  "matches_played": 3,
+  "updated_at": "2026-10-28T00:12:24.115Z"
+ }
+},
+{
+ "model": "project.playerranking",
+ "pk": 61,
+ "fields": {
+  "api_id": 7888,
+  "player_name": "Phil Foden",
+  "team": 2,
+  "position": "MID",
+  "season": "2026-27",
+  "goals": 3,
+  "assists": 1,
+  "penalties": 0,
+  "matches_played": 3,
+  "updated_at": "2026-10-28T00:14:25.920Z"
+ }
+},
+{
+ "model": "project.playerranking",
+ "pk": 62,
+ "fields": {
+  "api_id": 167689,
+  "player_name": "Carlos Augusto Lobaton",
+  "team": 9,
+  "position": "DEF",
+  "season": "2026-27",
+  "goals": 2,
+  "assists": 0,
+  "penalties": 0,
+  "matches_played": 3,
+  "updated_at": "2026-10-28T00:12:24.229Z"
+ }
+},
+{
+ "model": "project.playerranking",
+ "pk": 63,
+ "fields": {
+  "api_id": 37428,
+  "player_name": "Raphinha",
+  "team": 5,
+  "position": "FWD",
+  "season": "2026-27",
+  "goals": 2,
+  "assists": 0,
+  "penalties": 0,
+  "matches_played": 2,
+  "updated_at": "2026-10-28T00:14:25.923Z"
+ }
+},
+{
+ "model": "project.playerranking",
+ "pk": 64,
+ "fields": {
+  "api_id": 82515,
+  "player_name": "Karim Adeyemi",
+  "team": 5,
+  "position": "FWD",
+  "season": "2026-27",
+  "goals": 2,
+  "assists": 0,
+  "penalties": 0,
+  "matches_played": 3,
+  "updated_at": "2026-10-28T00:13:25.456Z"
+ }
+},
+{
+ "model": "project.playerranking",
+ "pk": 65,
+ "fields": {
+  "api_id": 202283,
+  "player_name": "Lamine Yamal",
+  "team": 5,
+  "position": "FWD",
+  "season": "2026-27",
+  "goals": 2,
+  "assists": 4,
+  "penalties": 0,
+  "matches_played": 3,
+  "updated_at": "2026-10-28T00:13:25.460Z"
+ }
+},
+{
+ "model": "project.playerranking",
+ "pk": 66,
+ "fields": {
+  "api_id": 22,
+  "player_name": "Fabián Ruiz",
+  "team": 7,
+  "position": "MID",
+  "season": "2026-27",
+  "goals": 2,
+  "assists": 1,
+  "penalties": 0,
+  "matches_played": 3,
+  "updated_at": "2026-10-28T00:13:24.707Z"
+ }
+},
+{
+ "model": "project.playerranking",
+ "pk": 67,
+ "fields": {
+  "api_id": 21288,
+  "player_name": "Alphonso Davies",
+  "team": 6,
+  "position": "DEF",
+  "season": "2026-27",
+  "goals": 2,
+  "assists": 0,
+  "penalties": 0,
+  "matches_played": 3,
+  "updated_at": "2026-10-28T00:12:23.614Z"
+ }
+},
+{
+ "model": "project.playerranking",
+ "pk": 68,
+ "fields": {
+  "api_id": 113765,
+  "player_name": "Michael Olise",
+  "team": 6,
+  "position": "FWD",
+  "season": "2026-27",
+  "goals": 2,
+  "assists": 1,
+  "penalties": 0,
+  "matches_played": 2,
+  "updated_at": "2026-10-28T00:13:25.803Z"
+ }
+},
+{
+ "model": "project.playerranking",
+ "pk": 69,
+ "fields": {
+  "api_id": 3220,
+  "player_name": "Lautaro Martínez",
+  "team": 9,
+  "position": "FWD",
+  "season": "2026-27",
+  "goals": 2,
+  "assists": 1,
+  "penalties": 0,
+  "matches_played": 2,
+  "updated_at": "2026-10-28T00:13:25.461Z"
+ }
+},
+{
+ "model": "project.playerranking",
+ "pk": 70,
+ "fields": {
+  "api_id": 205981,
+  "player_name": "Aleksey Batrakov",
+  "team": 8,
+  "position": "MID",
+  "season": "2026-27",
+  "goals": 2,
+  "assists": 0,
+  "penalties": 0,
+  "matches_played": 3,
+  "updated_at": "2026-10-28T00:12:23.511Z"
+ }
+},
+{
+ "model": "project.playerranking",
+ "pk": 71,
+ "fields": {
+  "api_id": 4032,
+  "player_name": "Eberechi Eze",
+  "team": 1,
+  "position": "MID",
+  "season": "2026-27",
+  "goals": 2,
+  "assists": 0,
+  "penalties": 0,
+  "matches_played": 3,
+  "updated_at": "2026-10-28T00:12:24.479Z"
+ }
+},
+{
+ "model": "project.playerranking",
+ "pk": 72,
+ "fields": {
+  "api_id": 28292,
+  "player_name": "Ronald Araújo",
+  "team": 3,
+  "position": "DEF",
+  "season": "2026-27",
+  "goals": 2,
+  "assists": 1,
+  "penalties": 0,
+  "matches_played": 3,
+  "updated_at": "2026-10-28T00:14:26.055Z"
+ }
+},
+{
+ "model": "project.playerranking",
+ "pk": 73,
+ "fields": {
+  "api_id": 177522,
+  "player_name": "Desire Doue",
+  "team": 7,
+  "position": "FWD",
+  "season": "2026-27",
+  "goals": 2,
+  "assists": 2,
+  "penalties": 0,
+  "matches_played": 3,
+  "updated_at": "2026-10-28T00:12:24.344Z"
+ }
+},
+{
+ "model": "project.playerranking",
+ "pk": 74,
+ "fields": {
+  "api_id": 178722,
+  "player_name": "Vitinha",
+  "team": 7,
+  "position": "MID",
+  "season": "2026-27",
+  "goals": 2,
+  "assists": 0,
+  "penalties": 0,
+  "matches_played": 3,
+  "updated_at": "2026-10-28T00:14:26.058Z"
+ }
+},
+{
+ "model": "project.playerranking",
+ "pk": 75,
+ "fields": {
+  "api_id": 96,
+  "player_name": "Federico Valverde",
+  "team": 4,
+  "position": "MID",
+  "season": "2026-27",
+  "goals": 1,
+  "assists": 0,
+  "penalties": 0,
+  "matches_played": 3,
+  "updated_at": "2026-10-28T00:13:24.710Z"
+ }
+},
+{
+ "model": "project.playerranking",
+ "pk": 76,
+ "fields": {
+  "api_id": 3236,
+  "player_name": "Gabriel Jesus",
+  "team": 5,
+  "position": "FWD",
+  "season": "2026-27",
+  "goals": 1,
+  "assists": 1,
+  "penalties": 0,
+  "matches_played": 3,
+  "updated_at": "2026-10-28T00:13:24.837Z"
+ }
+},
+{
+ "model": "project.playerranking",
+ "pk": 77,
+ "fields": {
+  "api_id": 16347,
+  "player_name": "Dominik Szoboszlai",
+  "team": 3,
+  "position": "MID",
+  "season": "2026-27",
+  "goals": 1,
+  "assists": 0,
+  "penalties": 0,
+  "matches_played": 1,
+  "updated_at": "2026-10-28T00:12:24.345Z"
+ }
+},
+{
+ "model": "project.playerranking",
+ "pk": 78,
+ "fields": {
+  "api_id": 7427,
+  "player_name": "Martin Ødegaard",
+  "team": 1,
+  "position": "MID",
+  "season": "2026-27",
+  "goals": 1,
+  "assists": 1,
+  "penalties": 0,
+  "matches_played": 3,
+  "updated_at": "2026-10-28T00:13:25.800Z"
+ }
+},
+{
+ "model": "project.playerranking",
+ "pk": 79,
+ "fields": {
+  "api_id": 144393,
+  "player_name": "Jamal Musiala",
+  "team": 6,
+  "position": "MID",
+  "season": "2026-27",
+  "goals": 1,
+  "assists": 0,
+  "penalties": 0,
+  "matches_played": 1,
+  "updated_at": "2026-10-28T00:13:24.944Z"
+ }
+},
+{
+ "model": "project.playerranking",
+ "pk": 80,
+ "fields": {
+  "api_id": 152738,
+  "player_name": "Ange-Yoan Bonny",
+  "team": 9,
+  "position": "FWD",
+  "season": "2026-27",
+  "goals": 1,
+  "assists": 0,
+  "penalties": 0,
+  "matches_played": 3,
+  "updated_at": "2026-10-28T00:12:23.737Z"
+ }
+},
+{
+ "model": "project.playerranking",
+ "pk": 81,
+ "fields": {
+  "api_id": 2000,
+  "player_name": "João Cancelo",
+  "team": 5,
+  "position": "DEF",
+  "season": "2026-27",
+  "goals": 1,
+  "assists": 1,
+  "penalties": 0,
+  "matches_played": 3,
+  "updated_at": "2026-10-28T00:13:25.202Z"
+ }
+},
+{
+ "model": "project.playerranking",
+ "pk": 82,
+ "fields": {
+  "api_id": 214533,
+  "player_name": "Fermín López",
+  "team": 5,
+  "position": "MID",
+  "season": "2026-27",
+  "goals": 1,
+  "assists": 1,
+  "penalties": 0,
+  "matches_played": 3,
+  "updated_at": "2026-10-28T00:13:24.711Z"
+ }
+},
+{
+ "model": "project.playerranking",
+ "pk": 83,
+ "fields": {
+  "api_id": 7848,
+  "player_name": "Anthony Gordon",
+  "team": 5,
+  "position": "FWD",
+  "season": "2026-27",
+  "goals": 1,
+  "assists": 0,
+  "penalties": 0,
+  "matches_played": 3,
+  "updated_at": "2026-10-28T00:12:23.860Z"
+ }
+},
+{
+ "model": "project.playerranking",
+ "pk": 84,
+ "fields": {
+  "api_id": 98816,
+  "player_name": "Jurrien Timber",
+  "team": 1,
+  "position": "DEF",
+  "season": "2026-27",
+  "goals": 1,
+  "assists": 0,
+  "penalties": 0,
+  "matches_played": 2,
+  "updated_at": "2026-10-28T00:13:25.307Z"
+ }
+},
+{
+ "model": "project.playerranking",
+ "pk": 85,
+ "fields": {
+  "api_id": 99813,
+  "player_name": "Bukayo Saka",
+  "team": 1,
+  "position": "FWD",
+  "season": "2026-27",
+  "goals": 1,
+  "assists": 1,
+  "penalties": 0,
+  "matches_played": 3,
+  "updated_at": "2026-10-28T00:12:24.118Z"
+ }
+},
+{
+ "model": "project.playerranking",
+ "pk": 86,
+ "fields": {
+  "api_id": 22396,
+  "player_name": "Luis Díaz",
+  "team": 6,
+  "position": "FWD",
+  "season": "2026-27",
+  "goals": 1,
+  "assists": 0,
+  "penalties": 0,
+  "matches_played": 3,
+  "updated_at": "2026-10-28T00:13:25.569Z"
+ }
+},
+{
+ "model": "project.playerranking",
+ "pk": 87,
+ "fields": {
+  "api_id": 128954,
+  "player_name": "Jeremie Frimpong",
+  "team": 3,
+  "position": "DEF",
+  "season": "2026-27",
+  "goals": 1,
+  "assists": 2,
+  "penalties": 0,
+  "matches_played": 2,
+  "updated_at": "2026-10-28T00:13:25.048Z"
+ }
+},
+{
+ "model": "project.playerranking",
+ "pk": 88,
+ "fields": {
+  "api_id": 244989,
+  "player_name": "Lewis Koumas",
+  "team": 3,
+  "position": "FWD",
+  "season": "2026-27",
+  "goals": 1,
+  "assists": 1,
+  "penalties": 0,
+  "matches_played": 3,
+  "updated_at": "2026-10-28T00:13:25.567Z"
+ }
+},
+{
+ "model": "project.playerranking",
+ "pk": 89,
+ "fields": {
+  "api_id": 247061,
+  "player_name": "Carlos Espí",
+  "team": 4,
+  "position": "FWD",
+  "season": "2026-27",
+  "goals": 1,
+  "assists": 0,
+  "penalties": 0,
+  "matches_played": 3,
+  "updated_at": "2026-10-28T00:12:24.341Z"
+ }
+},
+{
+ "model": "project.playerranking",
+ "pk": 90,
+ "fields": {
+  "api_id": 188487,
+  "player_name": "Endrick",
+  "team": 4,
+  "position": "FWD",
+  "season": "2026-27",
+  "goals": 1,
+  "assists": 0,
+  "penalties": 0,
+  "matches_played": 3,
+  "updated_at": "2026-10-28T00:13:24.598Z"
+ }
+},
+{
+ "model": "project.playerranking",
+ "pk": 91,
+ "fields": {
+  "api_id": 3177,
+  "player_name": "Antonio Rüdiger",
+  "team": 4,
+  "position": "DEF",
+  "season": "2026-27",
+  "goals": 1,
+  "assists": 0,
+  "penalties": 0,
+  "matches_played": 3,
+  "updated_at": "2026-10-28T00:12:23.990Z"
+ }
+},
+{
+ "model": "project.playerranking",
+ "pk": 92,
+ "fields": {
+  "api_id": 175701,
+  "player_name": "Maghnes Akliouche",
+  "team": 7,
+  "position": "FWD",
+  "season": "2026-27",
+  "goals": 1,
+  "assists": 1,
+  "penalties": 0,
+  "matches_played": 3,
+  "updated_at": "2026-10-28T00:13:25.682Z"
+ }
+},
+{
  "model": "project.matchpredictiontemplate",
  "pk": 1,
  "fields": {
