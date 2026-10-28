@@ -9,7 +9,7 @@ More screens: [team page](docs/team.png) · [match preview](docs/match.png) · [
 ## How it's built
 
 - Django app (`project/`) with eight models covering teams, club stats, player stats, matches, Champions League season records and saved predictions.
-- Player rankings are computed, not stored: `project/rankings.py` ranks players by goals plus assists per appearance, with a minimum-appearances rule and tie-breakers. Stats are pulled from football-data.org by the `sync_players` command.
+- Player rankings are computed, not stored: `project/rankings.py` ranks players by goals plus assists per appearance, with a minimum-appearances rule and tie-breakers. Stats are pulled from football-data.org by the `sync_players` command, which a GitHub Actions workflow runs every morning for the current season. Past seasons stay browsable.
 - Prediction model: a scikit-learn gradient boosting classifier trained on five seasons of Champions League records (`train_ml_model.py`), loaded by `ml_predictor.py`.
 - Optional live results from the football-data.org API, with a fallback to the app's own database when no key is set.
 - Django auth for sign up, login and saved predictions.

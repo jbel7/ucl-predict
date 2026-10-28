@@ -1,0 +1,61 @@
+# Pulls the current Champions League season's player stats from
+# football-data.org every morning and commits them to the fixture, so the
+# site always ships with up-to-date rankings. Past seasons are left alone.
+name: Sync player stats
+
+on:
+  schedule:
+    - cron: "0 6 * * *"   # daily, 06:00 UTC
+  workflow_dispatch:       # "Run workflow" button on the Actions tab
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-players
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      DJANGO_DEBUG: "true"
+      FOOTBALL_DATA_API_KEY: ${{ secrets.FOOTBALL_DATA_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Load current data
+        run: |
+          python manage.py migrate --noinput
+          python manage.py loaddata ucl_data
+
+      - name: Sync current season
+        run: python manage.py sync_players
+
+      - name: Export fixture
+        run: >
+          python manage.py dumpdata project.team project.teamstatistic
+          project.playerranking project.matchpredictiontemplate
+          project.championsleaguematch project.clrecord
+          --indent 1 -o project/fixtures/ucl_data.json
+
+      - name: Commit if stats changed
+        run: |
+          if git diff --quiet project/fixtures/ucl_data.json; then
+            echo "No changes."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add project/fixtures/ucl_data.json
+          git commit -m "Update player stats ($(date -u +%Y-%m-%d))"
+          git push
