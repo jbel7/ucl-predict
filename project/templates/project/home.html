@@ -73,17 +73,17 @@
                         <th>Player</th>
                         <th class="hide-sm">Team</th>
                         <th class="hide-sm">Position</th>
-                        <th class="num">G+A / 90</th>
+                        <th class="num">G+A / match</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for player in top_players %}
                     <tr>
-                        <td><span class="rank{% if player.rank_int <= 3 %} top{% endif %}">{{ player.rank_int }}</span></td>
+                        <td><span class="rank{% if player.rank <= 3 %} top{% endif %}">{{ player.rank }}</span></td>
                         <td class="strong">{{ player.player_name }}</td>
                         <td class="hide-sm"><a class="team-inline" href="{% url 'project:team_detail' player.team.pk %}">{% include 'project/_crest.html' with team=player.team size='crest-sm' %}{{ player.team.name }}</a></td>
-                        <td class="hide-sm"><span class="tag tag-{{ player.position }}">{{ player.get_position_display }}</span></td>
-                        <td class="num">{{ player.ga_per_90 }}</td>
+                        <td class="hide-sm">{% if player.position %}<span class="tag tag-{{ player.position }}">{{ player.get_position_display }}</span>{% else %}<span class="muted">—</span>{% endif %}</td>
+                        <td class="num">{{ player.per_match|floatformat:2 }}</td>
                     </tr>
                     {% endfor %}
                 </tbody>

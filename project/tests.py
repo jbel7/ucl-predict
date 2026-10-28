@@ -52,3 +52,46 @@ class SmokeTests(TestCase):
         team = Team.objects.first()
         response = self.client.post(reverse("project:predictor"), {"team_a": team.pk, "team_b": team.pk})
         self.assertContains(response, "Teams must be different")
+
+
+class RankingTests(TestCase):
+    def setUp(self):
+        self.team = Team.objects.create(name="Test FC", country="X", league="Y")
+
+    def player(self, name, goals, assists, matches):
+        from .models import PlayerRanking
+        return PlayerRanking.objects.create(
+            player_name=name, team=self.team, season="2025-26",
+            goals=goals, assists=assists, matches_played=matches,
+        )
+
+    def ranking(self):
+        from .rankings import ranked_players
+        return [(p.player_name, p.rank) for p in ranked_players()]
+
+    def test_orders_by_contributions_per_match(self):
+        self.player("Low", 2, 0, 10)     # 0.20
+        self.player("High", 9, 3, 10)    # 1.20
+        self.player("Mid", 5, 0, 10)     # 0.50
+        self.assertEqual(self.ranking(), [("High", 1), ("Mid", 2), ("Low", 3)])
+
+    def test_tie_breakers_and_shared_ranks(self):
+        self.player("More goals", 7, 2, 10)    # 0.90, 9 G+A, 7 goals
+        self.player("Fewer goals", 6, 3, 10)   # 0.90, 9 G+A, 6 goals
+        self.player("Exact tie A", 5, 0, 10)
+        self.player("Exact tie B", 5, 0, 10)
+        self.assertEqual(self.ranking(), [
+            ("More goals", 1), ("Fewer goals", 2), ("Exact tie A", 3), ("Exact tie B", 3),
+        ])
+
+    def test_too_few_appearances_do_not_qualify(self):
+        self.player("Regular", 6, 0, 12)       # most matches = 12, so 4 needed
+        self.player("Cameo", 2, 0, 1)          # 2.00 per match but only 1 app
+        self.assertEqual(self.ranking(), [("Regular", 1)])
+
+    def test_only_latest_season_is_ranked(self):
+        from .models import PlayerRanking
+        PlayerRanking.objects.create(player_name="Old", team=self.team, season="2024-25",
+                                     goals=20, assists=0, matches_played=10)
+        self.player("Current", 3, 0, 10)
+        self.assertEqual(self.ranking(), [("Current", 1)])

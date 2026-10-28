@@ -7,6 +7,7 @@ from django.urls import reverse_lazy
 from django.db.models import Q
 from .models import Team, PlayerRanking, MatchPredictionTemplate, SavedPrediction, TeamStatistic, ChampionsLeagueMatch, CLRecord
 from .forms import PredictorForm
+from .rankings import ranked_players, min_matches_for, current_season
 from .api_service import get_team_matches_from_api, get_team_cl_record_from_api, get_all_recent_matches_from_api
 from ml_predictor import get_predictor
 
@@ -15,7 +16,7 @@ from ml_predictor import get_predictor
 def home(request):
     """Homepage showing overview of UCL data"""
     teams = Team.objects.all()[:5]
-    top_players = PlayerRanking.objects.all()[:5]
+    top_players = ranked_players()[:5]
     featured_matches = MatchPredictionTemplate.objects.all()[:3]
     
     context = {
@@ -52,8 +53,8 @@ class TeamDetailView(DetailView):
         except (TeamStatistic.DoesNotExist, AttributeError):
             context['statistics'] = None
         
-        # Get up to 15 players from this team
-        context['players'] = PlayerRanking.objects.filter(team=self.object)[:15]
+        # This team's players with their overall rank (ranked across all clubs)
+        context['players'] = [p for p in ranked_players() if p.team_id == self.object.pk][:15]
         
         # Get recent Champions League matches (this season) - try API first, fallback to DB
         from datetime import datetime
@@ -107,7 +108,14 @@ class PlayerRankingListView(ListView):
     context_object_name = 'players'
     
     def get_queryset(self):
-        return PlayerRanking.objects.all().order_by('rank_int')
+        return ranked_players()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        season = current_season()
+        context['season'] = season
+        context['min_matches'] = min_matches_for(PlayerRanking.objects.filter(season=season))
+        return context
 
 
 # Match Views

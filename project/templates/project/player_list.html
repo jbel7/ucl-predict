@@ -5,9 +5,9 @@
 {% block content %}
 <section class="dark page-head">
     <div class="wrap">
-        <p class="eyebrow">Player rankings · {{ players|length }} players</p>
+        <p class="eyebrow">Player rankings · {{ season|default:"No season synced" }} · {{ players|length }} players</p>
         <h1 class="display">Who makes the <span class="accent">difference.</span></h1>
-        <p class="lede">Champions League attackers and creators ranked by goals plus assists per 90 minutes.</p>
+        <p class="lede">Champions League attackers and creators, ranked live from their stats by goals plus assists per match.</p>
     </div>
 </section>
 
@@ -22,23 +22,29 @@
                         <th>Player</th>
                         <th>Team</th>
                         <th class="hide-sm">Position</th>
-                        <th class="num">G+A / 90</th>
+                        <th class="num hide-sm">G</th>
+                        <th class="num hide-sm">A</th>
+                        <th class="num hide-sm">Apps</th>
+                        <th class="num">G+A / match</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for player in players %}
                     <tr>
-                        <td><span class="rank{% if player.rank_int <= 3 %} top{% endif %}">{{ player.rank_int }}</span></td>
+                        <td><span class="rank{% if player.rank <= 3 %} top{% endif %}">{{ player.rank }}</span></td>
                         <td class="strong">{{ player.player_name }}</td>
                         <td><a class="team-inline" href="{% url 'project:team_detail' player.team.pk %}">{% include 'project/_crest.html' with team=player.team size='crest-sm' %}<span class="hide-sm">{{ player.team.name }}</span></a></td>
-                        <td class="hide-sm"><span class="tag tag-{{ player.position }}">{{ player.get_position_display }}</span></td>
-                        <td class="num">{{ player.ga_per_90 }}</td>
+                        <td class="hide-sm">{% if player.position %}<span class="tag tag-{{ player.position }}">{{ player.get_position_display }}</span>{% else %}<span class="muted">—</span>{% endif %}</td>
+                        <td class="num hide-sm">{{ player.goals }}</td>
+                        <td class="num hide-sm">{{ player.assists }}</td>
+                        <td class="num hide-sm">{{ player.matches_played }}</td>
+                        <td class="num strong">{{ player.per_match|floatformat:2 }}</td>
                     </tr>
                     {% endfor %}
                 </tbody>
             </table>
         </div>
-        <p class="eyebrow" style="margin-top: 16px;">G+A / 90 = goals plus assists per 90 minutes played</p>
+        <p class="eyebrow" style="margin-top: 16px; line-height: 1.8;">Ranked by (goals + assists) ÷ appearances · ties broken by total G+A, then goals · minimum {{ min_matches }} appearance{{ min_matches|pluralize }} to qualify · source: football-data.org</p>
         {% else %}
         <div class="panel empty">
             <h3>No players yet</h3>
