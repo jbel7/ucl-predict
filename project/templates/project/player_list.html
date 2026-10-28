@@ -5,9 +5,16 @@
 {% block content %}
 <section class="dark page-head">
     <div class="wrap">
-        <p class="eyebrow">Player rankings · {{ season|default:"No season synced" }} · {{ players|length }} players</p>
+        <p class="eyebrow">Player rankings · {% if season %}{{ season }} season{% if is_current %} · Updated daily{% endif %}{% else %}No season synced{% endif %} · {{ players|length }} players</p>
         <h1 class="display">Who makes the <span class="accent">difference.</span></h1>
         <p class="lede">Champions League attackers and creators, ranked live from their stats by goals plus assists per match.</p>
+        {% if seasons|length > 1 %}
+        <nav class="season-switch" aria-label="Season">
+            {% for s in seasons %}
+            <a href="?season={{ s }}" {% if s == season %}aria-current="page"{% endif %}>{{ s }}{% if forloop.first %} <span>Current</span>{% endif %}</a>
+            {% endfor %}
+        </nav>
+        {% endif %}
     </div>
 </section>
 

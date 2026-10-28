@@ -95,3 +95,26 @@ class RankingTests(TestCase):
                                      goals=20, assists=0, matches_played=10)
         self.player("Current", 3, 0, 10)
         self.assertEqual(self.ranking(), [("Current", 1)])
+
+
+class SeasonSwitchTests(TestCase):
+    fixtures = ["ucl_data"]
+
+    def test_current_season_is_default_and_past_season_selectable(self):
+        from .rankings import available_seasons
+        seasons = available_seasons()
+        self.assertGreaterEqual(len(seasons), 2)
+        self.assertEqual(seasons, sorted(seasons, reverse=True))
+
+        default = self.client.get(reverse("project:player_list"))
+        self.assertEqual(default.context["season"], seasons[0])
+        self.assertTrue(default.context["is_current"])
+
+        past = self.client.get(reverse("project:player_list"), {"season": seasons[1]})
+        self.assertEqual(past.context["season"], seasons[1])
+        self.assertFalse(past.context["is_current"])
+        self.assertTrue(all(p.season == seasons[1] for p in past.context["players"]))
+
+    def test_unknown_season_falls_back_to_current(self):
+        response = self.client.get(reverse("project:player_list"), {"season": "1999-00"})
+        self.assertEqual(response.context["season"], response.context["seasons"][0])

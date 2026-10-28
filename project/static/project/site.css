@@ -384,3 +384,15 @@ table.data { width: 100%; border-collapse: collapse; font-size: 15px; }
 
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
 .panel.dark { background: var(--ink); border-color: var(--ink); color: var(--on-ink); }
+
+/* ---------- season switcher ---------- */
+
+.season-switch { display: inline-flex; flex-wrap: wrap; gap: 4px; margin-top: 28px; padding: 4px; border: 1px solid var(--ink-line); border-radius: 999px; }
+.season-switch a {
+  font-family: var(--mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase;
+  text-decoration: none; color: var(--on-ink-muted); padding: 8px 16px; border-radius: 999px;
+  transition: color .15s, background .15s;
+}
+.season-switch a:hover { color: var(--on-ink); }
+.season-switch a[aria-current="page"] { background: var(--accent); color: var(--ink); }
+.season-switch span { opacity: .6; margin-left: 4px; }

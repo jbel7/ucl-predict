@@ -5,7 +5,7 @@ every time a ranking is requested, so the order always follows the data.
 
 Rule
 ----
-- Pool: players from the most recent season on record.
+- Pool: players from one season (the most recent on record by default).
 - Score: goal contributions per match = (goals + assists) / matches played.
   (football-data.org doesn't provide minutes played, so a true per-90 rate
   isn't available.)
@@ -27,14 +27,20 @@ from .models import PlayerRanking
 MIN_SHARE_OF_MATCHES = 1 / 3
 
 
-def current_season():
-    """The most recent season that has player stats, e.g. '2025-26'."""
-    return (
+def available_seasons():
+    """Seasons that have player stats, newest first, e.g. ['2026-27', '2025-26']."""
+    return list(
         PlayerRanking.objects.exclude(season="")
         .order_by("-season")
         .values_list("season", flat=True)
-        .first()
+        .distinct()
     )
+
+
+def current_season():
+    """The most recent season that has player stats."""
+    seasons = available_seasons()
+    return seasons[0] if seasons else None
 
 
 def min_matches_for(players):
