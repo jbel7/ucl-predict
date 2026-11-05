@@ -777,11 +777,11 @@
   "team": 2,
   "position": "FWD",
   "season": "2026-27",
-  "goals": 4,
+  "goals": 5,
   "assists": 0,
   "penalties": 0,
-  "matches_played": 3,
-  "updated_at": "2026-10-28T00:13:24.601Z"
+  "matches_played": 4,
+  "updated_at": "2026-11-05T14:27:16.443Z"
  }
 },
 {
@@ -809,11 +809,11 @@
   "team": 4,
   "position": "FWD",
   "season": "2026-27",
-  "goals": 3,
+  "goals": 4,
   "assists": 1,
   "penalties": 0,
-  "matches_played": 3,
-  "updated_at": "2026-10-28T00:13:25.458Z"
+  "matches_played": 4,
+  "updated_at": "2026-11-05T14:27:16.445Z"
  }
 },
 {
@@ -828,8 +828,8 @@
   "goals": 3,
   "assists": 0,
   "penalties": 0,
-  "matches_played": 3,
-  "updated_at": "2026-10-28T00:12:23.513Z"
+  "matches_played": 4,
+  "updated_at": "2026-11-05T14:27:16.449Z"
  }
 },
 {
@@ -876,8 +876,8 @@
   "goals": 3,
   "assists": 0,
   "penalties": 0,
-  "matches_played": 3,
-  "updated_at": "2026-10-28T00:12:24.115Z"
+  "matches_played": 4,
+  "updated_at": "2026-11-05T14:27:16.451Z"
  }
 },
 {
@@ -892,8 +892,8 @@
   "goals": 3,
   "assists": 1,
   "penalties": 0,
-  "matches_played": 3,
-  "updated_at": "2026-10-28T00:14:25.920Z"
+  "matches_played": 4,
+  "updated_at": "2026-11-05T14:27:16.452Z"
  }
 },
 {
@@ -1052,8 +1052,8 @@
   "goals": 2,
   "assists": 0,
   "penalties": 0,
-  "matches_played": 3,
-  "updated_at": "2026-10-28T00:12:24.479Z"
+  "matches_played": 4,
+  "updated_at": "2026-11-05T14:27:16.457Z"
  }
 },
 {
@@ -1068,8 +1068,8 @@
   "goals": 2,
   "assists": 1,
   "penalties": 0,
-  "matches_played": 3,
-  "updated_at": "2026-10-28T00:14:26.055Z"
+  "matches_played": 4,
+  "updated_at": "2026-11-05T14:27:16.458Z"
  }
 },
 {
@@ -1113,11 +1113,11 @@
   "team": 4,
   "position": "MID",
   "season": "2026-27",
-  "goals": 1,
+  "goals": 2,
   "assists": 0,
   "penalties": 0,
-  "matches_played": 3,
-  "updated_at": "2026-10-28T00:13:24.710Z"
+  "matches_played": 4,
+  "updated_at": "2026-11-05T14:27:16.453Z"
  }
 },
 {
@@ -1148,8 +1148,8 @@
   "goals": 1,
   "assists": 0,
   "penalties": 0,
-  "matches_played": 1,
-  "updated_at": "2026-10-28T00:12:24.345Z"
+  "matches_played": 2,
+  "updated_at": "2026-11-05T14:27:16.460Z"
  }
 },
 {
@@ -1164,8 +1164,8 @@
   "goals": 1,
   "assists": 1,
   "penalties": 0,
-  "matches_played": 3,
-  "updated_at": "2026-10-28T00:13:25.800Z"
+  "matches_played": 4,
+  "updated_at": "2026-11-05T14:27:16.461Z"
  }
 },
 {
@@ -1260,8 +1260,8 @@
   "goals": 1,
   "assists": 0,
   "penalties": 0,
-  "matches_played": 2,
-  "updated_at": "2026-10-28T00:13:25.307Z"
+  "matches_played": 3,
+  "updated_at": "2026-11-05T14:27:16.464Z"
  }
 },
 {
@@ -1324,56 +1324,8 @@
   "goals": 1,
   "assists": 1,
   "penalties": 0,
-  "matches_played": 3,
-  "updated_at": "2026-10-28T00:13:25.567Z"
- }
-},
-{
- "model": "project.playerranking",
- "pk": 89,
- "fields": {
-  "api_id": 247061,
-  "player_name": "Carlos Espí",
-  "team": 4,
-  "position": "FWD",
-  "season": "2026-27",
-  "goals": 1,
-  "assists": 0,
-  "penalties": 0,
-  "matches_played": 3,
-  "updated_at": "2026-10-28T00:12:24.341Z"
- }
-},
-{
- "model": "project.playerranking",
- "pk": 90,
- "fields": {
-  "api_id": 188487,
-  "player_name": "Endrick",
-  "team": 4,
-  "position": "FWD",
-  "season": "2026-27",
-  "goals": 1,
-  "assists": 0,
-  "penalties": 0,
-  "matches_played": 3,
-  "updated_at": "2026-10-28T00:13:24.598Z"
- }
-},
-{
- "model": "project.playerranking",
- "pk": 91,
- "fields": {
-  "api_id": 3177,
-  "player_name": "Antonio Rüdiger",
-  "team": 4,
-  "position": "DEF",
-  "season": "2026-27",
-  "goals": 1,
-  "assists": 0,
-  "penalties": 0,
-  "matches_played": 3,
-  "updated_at": "2026-10-28T00:12:23.990Z"
+  "matches_played": 4,
+  "updated_at": "2026-11-05T14:27:16.467Z"
  }
 },
 {
