@@ -780,8 +780,8 @@
   "goals": 5,
   "assists": 0,
   "penalties": 0,
-  "matches_played": 4,
-  "updated_at": "2026-11-05T14:27:16.443Z"
+  "matches_played": 5,
+  "updated_at": "2026-11-25T17:00:46.003Z"
  }
 },
 {
@@ -809,11 +809,11 @@
   "team": 4,
   "position": "FWD",
   "season": "2026-27",
-  "goals": 4,
-  "assists": 1,
+  "goals": 6,
+  "assists": 2,
   "penalties": 0,
-  "matches_played": 4,
-  "updated_at": "2026-11-05T14:27:16.445Z"
+  "matches_played": 5,
+  "updated_at": "2026-11-25T17:00:46.002Z"
  }
 },
 {
@@ -892,8 +892,8 @@
   "goals": 3,
   "assists": 1,
   "penalties": 0,
-  "matches_played": 4,
-  "updated_at": "2026-11-05T14:27:16.452Z"
+  "matches_played": 5,
+  "updated_at": "2026-11-25T17:00:46.009Z"
  }
 },
 {
@@ -924,8 +924,8 @@
   "goals": 4,
   "assists": 0,
   "penalties": 0,
-  "matches_played": 3,
-  "updated_at": "2026-11-04T14:12:07.303Z"
+  "matches_played": 4,
+  "updated_at": "2026-11-25T17:00:46.004Z"
  }
 },
 {
@@ -940,8 +940,8 @@
   "goals": 2,
   "assists": 0,
   "penalties": 0,
-  "matches_played": 4,
-  "updated_at": "2026-11-04T14:12:07.309Z"
+  "matches_played": 5,
+  "updated_at": "2026-11-25T17:00:46.010Z"
  }
 },
 {
@@ -1052,8 +1052,8 @@
   "goals": 2,
   "assists": 0,
   "penalties": 0,
-  "matches_played": 4,
-  "updated_at": "2026-11-05T14:27:16.457Z"
+  "matches_played": 5,
+  "updated_at": "2026-11-25T17:00:46.012Z"
  }
 },
 {
@@ -1113,11 +1113,11 @@
   "team": 4,
   "position": "MID",
   "season": "2026-27",
-  "goals": 2,
+  "goals": 3,
   "assists": 0,
   "penalties": 0,
-  "matches_played": 4,
-  "updated_at": "2026-11-05T14:27:16.453Z"
+  "matches_played": 5,
+  "updated_at": "2026-11-25T17:00:46.005Z"
  }
 },
 {
@@ -1132,8 +1132,8 @@
   "goals": 1,
   "assists": 1,
   "penalties": 0,
-  "matches_played": 4,
-  "updated_at": "2026-11-04T14:12:07.312Z"
+  "matches_played": 5,
+  "updated_at": "2026-11-25T17:00:46.015Z"
  }
 },
 {
@@ -1164,8 +1164,8 @@
   "goals": 1,
   "assists": 1,
   "penalties": 0,
-  "matches_played": 4,
-  "updated_at": "2026-11-05T14:27:16.461Z"
+  "matches_played": 5,
+  "updated_at": "2026-11-25T17:00:46.016Z"
  }
 },
 {
@@ -1212,8 +1212,8 @@
   "goals": 1,
   "assists": 2,
   "penalties": 0,
-  "matches_played": 4,
-  "updated_at": "2026-11-04T14:12:07.314Z"
+  "matches_played": 5,
+  "updated_at": "2026-11-25T17:00:46.018Z"
  }
 },
 {
@@ -1228,8 +1228,8 @@
   "goals": 1,
   "assists": 2,
   "penalties": 0,
-  "matches_played": 4,
-  "updated_at": "2026-11-04T14:12:07.314Z"
+  "matches_played": 5,
+  "updated_at": "2026-11-25T17:00:46.018Z"
  }
 },
 {
@@ -1244,8 +1244,8 @@
   "goals": 1,
   "assists": 0,
   "penalties": 0,
-  "matches_played": 4,
-  "updated_at": "2026-11-04T14:12:07.315Z"
+  "matches_played": 5,
+  "updated_at": "2026-11-25T17:00:46.019Z"
  }
 },
 {
@@ -1260,8 +1260,8 @@
   "goals": 1,
   "assists": 0,
   "penalties": 0,
-  "matches_played": 3,
-  "updated_at": "2026-11-05T14:27:16.464Z"
+  "matches_played": 4,
+  "updated_at": "2026-11-25T17:00:46.019Z"
  }
 },
 {
@@ -1282,50 +1282,50 @@
 },
 {
  "model": "project.playerranking",
- "pk": 86,
+ "pk": 89,
  "fields": {
-  "api_id": 22396,
-  "player_name": "Luis Díaz",
-  "team": 6,
-  "position": "FWD",
+  "api_id": 133242,
+  "player_name": "Rayan Cherki",
+  "team": 2,
+  "position": "MID",
   "season": "2026-27",
-  "goals": 1,
+  "goals": 2,
   "assists": 0,
   "penalties": 0,
-  "matches_played": 3,
-  "updated_at": "2026-10-28T00:13:25.569Z"
+  "matches_played": 5,
+  "updated_at": "2026-11-25T17:00:46.198Z"
  }
 },
 {
  "model": "project.playerranking",
- "pk": 87,
+ "pk": 90,
  "fields": {
-  "api_id": 128954,
-  "player_name": "Jeremie Frimpong",
-  "team": 3,
-  "position": "DEF",
+  "api_id": 125010,
+  "player_name": "Jude Bellingham",
+  "team": 4,
+  "position": "MID",
   "season": "2026-27",
-  "goals": 1,
-  "assists": 2,
-  "penalties": 0,
-  "matches_played": 2,
-  "updated_at": "2026-10-28T00:13:25.048Z"
- }
-},
-{
- "model": "project.playerranking",
- "pk": 88,
- "fields": {
-  "api_id": 244989,
-  "player_name": "Lewis Koumas",
-  "team": 3,
-  "position": "FWD",
-  "season": "2026-27",
-  "goals": 1,
+  "goals": 2,
   "assists": 1,
   "penalties": 0,
-  "matches_played": 4,
-  "updated_at": "2026-11-05T14:27:16.467Z"
+  "matches_played": 5,
+  "updated_at": "2026-11-25T17:00:46.197Z"
+ }
+},
+{
+ "model": "project.playerranking",
+ "pk": 91,
+ "fields": {
+  "api_id": 8279,
+  "player_name": "Viktor Gyökeres",
+  "team": 1,
+  "position": "FWD",
+  "season": "2026-27",
+  "goals": 2,
+  "assists": 2,
+  "penalties": 0,
+  "matches_played": 5,
+  "updated_at": "2026-11-25T17:00:46.199Z"
  }
 },
 {
