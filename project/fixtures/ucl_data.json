@@ -828,8 +828,8 @@
   "goals": 3,
   "assists": 0,
   "penalties": 0,
-  "matches_played": 4,
-  "updated_at": "2026-11-05T14:27:16.449Z"
+  "matches_played": 5,
+  "updated_at": "2026-11-26T16:41:56.574Z"
  }
 },
 {
@@ -841,11 +841,11 @@
   "team": 7,
   "position": "FWD",
   "season": "2026-27",
-  "goals": 3,
+  "goals": 4,
   "assists": 3,
-  "penalties": 0,
-  "matches_played": 3,
-  "updated_at": "2026-10-28T00:13:25.805Z"
+  "penalties": 1,
+  "matches_played": 4,
+  "updated_at": "2026-11-26T16:41:56.567Z"
  }
 },
 {
@@ -860,8 +860,8 @@
   "goals": 3,
   "assists": 0,
   "penalties": 0,
-  "matches_played": 4,
-  "updated_at": "2026-11-04T14:12:07.307Z"
+  "matches_played": 5,
+  "updated_at": "2026-11-26T16:41:56.575Z"
  }
 },
 {
@@ -876,8 +876,8 @@
   "goals": 3,
   "assists": 0,
   "penalties": 0,
-  "matches_played": 4,
-  "updated_at": "2026-11-05T14:27:16.451Z"
+  "matches_played": 5,
+  "updated_at": "2026-11-26T16:41:56.578Z"
  }
 },
 {
@@ -908,8 +908,8 @@
   "goals": 2,
   "assists": 0,
   "penalties": 0,
-  "matches_played": 4,
-  "updated_at": "2026-11-04T14:12:07.308Z"
+  "matches_played": 5,
+  "updated_at": "2026-11-26T16:41:56.581Z"
  }
 },
 {
@@ -937,11 +937,11 @@
   "team": 5,
   "position": "FWD",
   "season": "2026-27",
-  "goals": 2,
+  "goals": 3,
   "assists": 0,
   "penalties": 0,
   "matches_played": 5,
-  "updated_at": "2026-11-25T17:00:46.010Z"
+  "updated_at": "2026-11-26T16:41:56.572Z"
  }
 },
 {
@@ -972,8 +972,8 @@
   "goals": 4,
   "assists": 1,
   "penalties": 0,
-  "matches_played": 4,
-  "updated_at": "2026-11-04T14:12:07.303Z"
+  "matches_played": 5,
+  "updated_at": "2026-11-26T16:41:56.569Z"
  }
 },
 {
@@ -1017,11 +1017,11 @@
   "team": 9,
   "position": "FWD",
   "season": "2026-27",
-  "goals": 2,
+  "goals": 3,
   "assists": 1,
   "penalties": 0,
-  "matches_played": 2,
-  "updated_at": "2026-10-28T00:13:25.461Z"
+  "matches_played": 3,
+  "updated_at": "2026-11-26T16:41:56.576Z"
  }
 },
 {
@@ -1068,8 +1068,8 @@
   "goals": 2,
   "assists": 1,
   "penalties": 0,
-  "matches_played": 4,
-  "updated_at": "2026-11-05T14:27:16.458Z"
+  "matches_played": 5,
+  "updated_at": "2026-11-26T16:41:56.585Z"
  }
 },
 {
@@ -1100,8 +1100,8 @@
   "goals": 2,
   "assists": 1,
   "penalties": 0,
-  "matches_played": 4,
-  "updated_at": "2026-11-04T14:12:07.311Z"
+  "matches_played": 5,
+  "updated_at": "2026-11-26T16:41:56.586Z"
  }
 },
 {
@@ -1129,11 +1129,11 @@
   "team": 5,
   "position": "FWD",
   "season": "2026-27",
-  "goals": 1,
+  "goals": 2,
   "assists": 1,
   "penalties": 0,
   "matches_played": 5,
-  "updated_at": "2026-11-25T17:00:46.015Z"
+  "updated_at": "2026-11-26T16:41:56.582Z"
  }
 },
 {
@@ -1146,10 +1146,10 @@
   "position": "MID",
   "season": "2026-27",
   "goals": 1,
-  "assists": 0,
+  "assists": 1,
   "penalties": 0,
-  "matches_played": 2,
-  "updated_at": "2026-11-05T14:27:16.460Z"
+  "matches_played": 3,
+  "updated_at": "2026-11-26T16:41:56.590Z"
  }
 },
 {
@@ -1180,8 +1180,8 @@
   "goals": 1,
   "assists": 0,
   "penalties": 0,
-  "matches_played": 1,
-  "updated_at": "2026-10-28T00:13:24.944Z"
+  "matches_played": 2,
+  "updated_at": "2026-11-26T16:41:56.591Z"
  }
 },
 {
@@ -1241,43 +1241,11 @@
   "team": 5,
   "position": "FWD",
   "season": "2026-27",
-  "goals": 1,
+  "goals": 3,
   "assists": 0,
   "penalties": 0,
   "matches_played": 5,
-  "updated_at": "2026-11-25T17:00:46.019Z"
- }
-},
-{
- "model": "project.playerranking",
- "pk": 84,
- "fields": {
-  "api_id": 98816,
-  "player_name": "Jurrien Timber",
-  "team": 1,
-  "position": "DEF",
-  "season": "2026-27",
-  "goals": 1,
-  "assists": 0,
-  "penalties": 0,
-  "matches_played": 4,
-  "updated_at": "2026-11-25T17:00:46.019Z"
- }
-},
-{
- "model": "project.playerranking",
- "pk": 85,
- "fields": {
-  "api_id": 99813,
-  "player_name": "Bukayo Saka",
-  "team": 1,
-  "position": "FWD",
-  "season": "2026-27",
-  "goals": 1,
-  "assists": 1,
-  "penalties": 0,
-  "matches_played": 3,
-  "updated_at": "2026-10-28T00:12:24.118Z"
+  "updated_at": "2026-11-26T16:41:56.577Z"
  }
 },
 {
@@ -1326,6 +1294,38 @@
   "penalties": 0,
   "matches_played": 5,
   "updated_at": "2026-11-25T17:00:46.199Z"
+ }
+},
+{
+ "model": "project.playerranking",
+ "pk": 92,
+ "fields": {
+  "api_id": 6486,
+  "player_name": "Alexander Isak",
+  "team": 3,
+  "position": "FWD",
+  "season": "2026-27",
+  "goals": 3,
+  "assists": 1,
+  "penalties": 0,
+  "matches_played": 4,
+  "updated_at": "2026-11-26T16:41:56.713Z"
+ }
+},
+{
+ "model": "project.playerranking",
+ "pk": 93,
+ "fields": {
+  "api_id": 19334,
+  "player_name": "Florian Wirtz",
+  "team": 3,
+  "position": "MID",
+  "season": "2026-27",
+  "goals": 2,
+  "assists": 1,
+  "penalties": 0,
+  "matches_played": 5,
+  "updated_at": "2026-11-26T16:41:56.825Z"
  }
 },
 {
